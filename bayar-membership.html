@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pembayaran Membership — Petsaga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          mono: ['"Space Mono"', 'monospace']
+        },
+        colors: {
+          brand: {
+            gold: '#F99D26',
+            teal: '#0B474D'
+          },
+          cafe: { DEFAULT: '#F99D26', hover: '#E07D10', tint: '#FFF7ED' },
+          groom: { DEFAULT: '#0B474D', hover: '#073439', tint: '#F0FDFD' },
+          cta: { DEFAULT: '#F99D26', hover: '#E07D10' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="cust" style="background:#FFFFFF">
+
+<!-- Header / Top Bar -->
+<header>
+  <a href="index.html" class="brand">
+    <img src="img/logo.png" alt="Logo Petsaga" class="brand-logo-img">
+    <div class="brand-text">
+      <span class="title">petsaga</span>
+      <small>Pembayaran Membership</small>
+    </div>
+  </a>
+
+  <div class="row" style="gap:10px">
+    <a href="member.html" class="btn sm ghost">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+      Kembali ke Membership
+    </a>
+  </div>
+</header>
+
+<main style="max-width:880px;padding:36px 20px 80px">
+  <div style="margin-bottom:28px;text-align:center">
+    <span class="b ok" style="margin-bottom:8px">Paket Resmi Petsaga</span>
+    <h1 style="font-size:1.85rem;margin:8px 0 6px;color:var(--brand-teal)">Pembayaran VIP Membership</h1>
+    <p class="mut" style="font-size:1rem;margin:0">Aktifkan 10 sesi grooming berlaku 1 tahun penuh seharga Rp700.000</p>
+  </div>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(340px, 1fr));gap:24px;align-items:start">
+    
+    <!-- Kolom Kiri: Rincian Paket & Manfaat -->
+    <div class="card" style="border-radius:20px;border:1.5px solid var(--bd)">
+      <div class="row" style="justify-content:space-between;margin-bottom:14px;border-bottom:1px solid var(--bd);padding-bottom:12px">
+        <h3 style="margin:0;color:var(--brand-teal)">Rincian Paket VIP</h3>
+        <span class="b cafe">10 Sesi / 1 Tahun</span>
+      </div>
+
+      <div style="margin-bottom:18px">
+        <b style="font-size:1.15rem;color:var(--tx);display:block">VIP Gold Pass Member Card</b>
+        <small class="mut">Member ID: #PSG-2024-C01 · Pemilik: <span id="payOwnerName">Aulia Rahma</span></small>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;margin:20px 0;background:var(--sec);padding:18px;border-radius:14px;border:1px solid var(--bd)">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div class="card-icon" style="background:#FFF7ED;color:var(--brand-gold);width:32px;height:32px;border:1px solid #FED7AA">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <b style="font-size:0.92rem">10x Sesi Basic Grooming Kucing</b>
+            <p class="mut" style="margin:2px 0 0;font-size:0.82rem">Hanya <b>Rp70.000 / kucing</b> (harga reguler salon non-member <b>Rp75.000 – Rp90.000</b>). 1 sesi kuota = 1 ekor kucing. Jika membawa 5 kucing sekaligus, kuota langsung terpakai 5 sesi.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div class="card-icon" style="background:#F0FDFD;color:var(--brand-teal);width:32px;height:32px;border:1px solid #CCFBF1">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <b style="font-size:0.92rem">Masa Berlaku: 25 Nov 2026 – 25 Nov 2027</b>
+            <p class="mut" style="margin:2px 0 0;font-size:0.82rem">Aktif 1 tahun penuh. Kuota otomatis hangus jika tidak digunakan dalam rentang waktu 1 tahun.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div class="card-icon" style="background:#FEF3C7;color:#D97706;width:32px;height:32px;border:1px solid #FDE68A">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <b style="font-size:0.92rem">Gift Makanan Anabul Saat Perpanjangan</b>
+            <p class="mut" style="margin:2px 0 0;font-size:0.82rem">Dapatkan gift makanan anabul premium gratis saat memperpanjang setelah kuota 10 sesi habis terpakai.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--bd);padding-top:16px">
+        <div class="row" style="justify-content:space-between;margin-bottom:8px">
+          <span style="color:var(--tx2)">Harga Paket (1 Tahun / 10 Sesi Grooming):</span>
+          <b>Rp700.000</b>
+        </div>
+        <div class="row" style="justify-content:space-between;margin-bottom:8px">
+          <span style="color:var(--tx2)">Biaya Administrasi:</span>
+          <span class="b ok" style="padding:1px 8px;font-size:0.75rem">Gratis</span>
+        </div>
+        <div class="row" style="justify-content:space-between;margin-top:12px;padding-top:10px;border-top:1px dashed var(--bd)">
+          <b style="font-size:1.05rem;color:var(--brand-teal)">Total Pembayaran:</b>
+          <b style="font-size:1.35rem;color:var(--brand-gold)">Rp700.000</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kolom Kanan: Pilihan Pembayaran & Tombol Bayar -->
+    <div class="card" style="border-radius:20px;border:1.5px solid var(--bd)">
+      <h3 style="margin:0 0 16px;border-bottom:1px solid var(--bd);padding-bottom:12px;color:var(--brand-teal)">Metode Pembayaran</h3>
+
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <!-- Opsi 1: QRIS -->
+        <label class="pack checked" style="padding:14px;border-color:var(--brand-teal);background:var(--brand-teal-t)">
+          <input type="radio" name="payMethod" value="qris" checked style="top:14px;right:14px">
+          <b style="font-size:0.96rem;color:var(--brand-teal)">QRIS (Instant QR)</b>
+          <small class="mut">Gojek, OVO, Dana, ShopeePay, LinkAja, BCA Mobile</small>
+          <div style="margin-top:12px;background:#FFFFFF;padding:12px;border-radius:10px;border:1px solid var(--bd);text-align:center">
+            <!-- QR Placeholder SVG -->
+            <svg class="w-32 h-32 mx-auto" viewBox="0 0 100 100" fill="currentColor" style="color:var(--brand-teal)">
+              <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="4"/>
+              <rect x="12" y="12" width="16" height="16" fill="currentColor"/>
+              <rect x="65" y="5" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="4"/>
+              <rect x="72" y="12" width="16" height="16" fill="currentColor"/>
+              <rect x="5" y="65" width="30" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="4"/>
+              <rect x="12" y="72" width="16" height="16" fill="currentColor"/>
+              <rect x="42" y="10" width="8" height="8"/>
+              <rect x="42" y="24" width="8" height="8"/>
+              <rect x="10" y="44" width="8" height="8"/>
+              <rect x="24" y="44" width="8" height="8"/>
+              <rect x="42" y="42" width="16" height="16"/>
+              <rect x="65" y="44" width="8" height="8"/>
+              <rect x="80" y="44" width="8" height="8"/>
+              <rect x="44" y="65" width="8" height="8"/>
+              <rect x="44" y="80" width="8" height="8"/>
+              <rect x="65" y="65" width="12" height="12"/>
+              <rect x="80" y="80" width="12" height="12"/>
+            </svg>
+            <small class="mut" style="font-size:0.75rem;display:block;margin-top:6px">Scan QR di atas dengan aplikasi m-banking atau e-wallet</small>
+          </div>
+        </label>
+
+        <!-- Opsi 2: Virtual Account -->
+        <label class="pack" style="padding:14px">
+          <input type="radio" name="payMethod" value="va" style="top:14px;right:14px">
+          <b style="font-size:0.96rem">Virtual Account Bank (BCA / Mandiri / BRI)</b>
+          <small class="mut">Nomor VA: 8820 0812 0000 0001</small>
+        </label>
+
+        <!-- Opsi 3: Kartu Kredit -->
+        <label class="pack" style="padding:14px">
+          <input type="radio" name="payMethod" value="cc" style="top:14px;right:14px">
+          <b style="font-size:0.96rem">Kartu Kredit / Debit Online</b>
+          <small class="mut">Visa, Mastercard, JCB</small>
+        </label>
+      </div>
+
+      <div style="margin-top:24px">
+        <button id="btnBayarMembership" class="btn cta lg" style="width:100%;font-size:1.05rem;padding:15px;box-shadow:0 6px 20px rgba(249, 157, 38, 0.4)">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          Bayar Rp700.000 Sekarang
+        </button>
+        <small class="mut" style="display:block;text-align:center;margin-top:10px">
+          Transaksi aman terenkripsi. Selesai bayar, membership aktif otomatis.
+        </small>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Floating Toast -->
+<div id="toast" aria-live="polite"></div>
+
+<!-- Modal Dialog -->
+<div id="modal" class="overlay" hidden>
+  <div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <h2 id="mt"></h2>
+    <div id="mb"></div>
+    <div class="row" id="mf" style="margin-top:20px;justify-content:flex-end"></div>
+  </div>
+</div>
+
+<script src="data/dummy-data.js"></script>
+<script src="js/core.js"></script>
+<script>
+  // Tampilkan nama pendaftar jika datang dari form registrasi member baru
+  const savedName = sessionStorage.getItem('petsaga_new_member_name');
+  if (savedName) {
+    const ownerEl = document.getElementById('payOwnerName');
+    if (ownerEl) ownerEl.textContent = savedName;
+  }
+
+  // Logic Pembayaran Membership
+  const btnBayar = document.getElementById('btnBayarMembership');
+  if (btnBayar) {
+    btnBayar.addEventListener('click', () => {
+      btnBayar.disabled = true;
+      btnBayar.innerHTML = 'Memproses Pembayaran...';
+
+      setTimeout(() => {
+        // Simpan status aktif VIP membership
+        localStorage.setItem('petsaga_vip_active', '1');
+        sessionStorage.setItem('petsaga_membership_renewed', '1');
+        
+        M('Pembayaran Berhasil!', `
+          <div style="text-align:center;padding:10px 0">
+            <div style="width:60px;height:60px;border-radius:50%;background:#F0FDFA;color:var(--ok);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:1.5px solid #99F6E4">
+              <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <h3 style="margin:0 0 8px;color:var(--brand-teal)">Membership VIP Resmi Aktif!</h3>
+            <p style="color:var(--tx2);font-size:0.95rem;line-height:1.6">
+              Pembayaran sebesar <b>Rp700.000</b> telah diterima. Kartu VIP Anda aktif 1 tahun penuh (<b>25 Nov 2026 – 25 Nov 2027</b>) dengan kuota <b>10 sesi Basic Grooming</b> (Rp70.000 / kucing).
+            </p>
+          </div>
+        `, [
+          ['Buka Kartu Membership VIP', 'cta', () => {
+            window.location.href = 'member.html';
+          }]
+        ]);
+      }, 700);
+    });
+  }
+</script>
+</body>
+</html>

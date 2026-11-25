@@ -35,15 +35,7 @@
 <!-- Header / Top Bar -->
 <header>
   <a href="index.html" class="brand">
-    <div class="brand-badge">
-      <svg viewBox="0 0 24 24">
-        <circle cx="7" cy="8.5" r="2.2"/>
-        <circle cx="17" cy="8.5" r="2.2"/>
-        <circle cx="10" cy="5" r="2.2"/>
-        <circle cx="14" cy="5" r="2.2"/>
-        <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
-      </svg>
-    </div>
+    <img src="img/logo.png" alt="Logo Petsaga" class="brand-logo-img">
     <div class="brand-text">
       <span class="title">petsaga</span>
       <small>Cat Cafe &amp; Pet Grooming</small>
@@ -65,10 +57,6 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       <span>Portal Admin</span>
     </a>
-    <button class="btn sm ghost" data-action="reset" title="Kembalikan semua data ke kondisi awal">
-      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-      Reset Demo
-    </button>
   </div>
 </header>
 
@@ -193,10 +181,15 @@
         <div class="fld">
           <label for="pj">Jenis Hewan</label>
           <select id="pj" name="t">
-            <option>Kucing</option>
-            <option>Anjing</option>
-            <option>Kelinci / Lainnya</option>
+            <option value="Kucing">Kucing</option>
+            <option value="Anjing">Anjing</option>
+            <option value="Lainnya">Lainnya</option>
           </select>
+        </div>
+
+        <div class="fld" id="fldOtherPet" style="display:none">
+          <label for="pOther">Sebutkan Jenis Hewan</label>
+          <input id="pOther" name="otherType" type="text" placeholder="Contoh: Kelinci, Hamster, Sugar Glider, dll.">
         </div>
 
         <div class="fld">
@@ -279,5 +272,22 @@
 
 <script src="data/dummy-data.js"></script>
 <script src="js/core.js"></script>
+<script>
+  const pj = document.getElementById('pj');
+  const fldOther = document.getElementById('fldOtherPet');
+  const pOther = document.getElementById('pOther');
+  if (pj && fldOther) {
+    pj.addEventListener('change', () => {
+      if (pj.value === 'Lainnya') {
+        fldOther.style.display = 'block';
+        pOther.required = true;
+        pOther.focus();
+      } else {
+        fldOther.style.display = 'none';
+        pOther.required = false;
+      }
+    });
+  }
+</script>
 </body>
 </html>

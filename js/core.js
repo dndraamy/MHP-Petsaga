@@ -106,31 +106,55 @@ const Actions = {
     });
   },
 
-  // Konfirmasi reservasi
+  // Konfirmasi reservasi (Admin hanya bisa pilih salah satu: konfirmasi atau tolak)
   conf: btn => {
-    const row = btn.closest('tr') || btn.closest('.row');
-    const badge = row?.querySelector('.b.wn');
-    if (badge) {
-      badge.className = 'b ok';
-      badge.textContent = 'Terkonfirmasi';
+    const id = btn.dataset.v;
+    const tr = btn.closest('tr');
+    if (tr) {
+      const stBadge = tr.querySelector('.b.wn, .b.ok, .b.dg');
+      if (stBadge) {
+        stBadge.className = 'b ok';
+        stBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;display:inline-block"><polyline points="20 6 9 17 4 12"/></svg> Terkonfirmasi`;
+      }
+      tr.setAttribute('data-st', 'Terkonfirmasi');
+      const actionCell = tr.querySelector('td:last-child');
+      if (actionCell) {
+        actionCell.innerHTML = `<button class="btn sm in" data-action="det" data-v="${id}">Detail</button>`;
+      }
+    } else {
+      const containerRow = btn.parentElement;
+      if (containerRow) {
+        containerRow.innerHTML = `<span class="b ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;display:inline-block"><polyline points="20 6 9 17 4 12"/></svg> Terkonfirmasi</span>`;
+      }
     }
-    btn.remove();
-    toast(`Reservasi ${btn.dataset.v} berhasil dikonfirmasi`, 'ok');
+    toast(`Reservasi ${id} berhasil disetujui & dikonfirmasi`, 'ok');
   },
 
-  // Tolak reservasi
+  // Tolak reservasi (Admin hanya bisa pilih salah satu: konfirmasi atau tolak)
   rej: btn => {
-    M('Tolak reservasi?', `<p>Reservasi <b>${btn.dataset.v}</b> akan ditolak dan slot akan dilepas.</p>`, [
+    const id = btn.dataset.v;
+    M('Tolak Reservasi?', `<p>Apakah Anda yakin ingin menolak reservasi <b>${esc(id)}</b>?</p>`, [
       ['Batal', 'ghost'],
-      ['Tolak', 'dg', () => {
-        const row = btn.closest('tr') || btn.closest('.row');
-        const badge = row?.querySelector('.b.wn') || row?.querySelector('.b.ok');
-        if (badge) {
-          badge.className = 'b dg';
-          badge.textContent = 'Ditolak';
+      ['Tolak Reservasi', 'dg', () => {
+        const tr = btn.closest('tr');
+        if (tr) {
+          const stBadge = tr.querySelector('.b.wn, .b.ok, .b.dg');
+          if (stBadge) {
+            stBadge.className = 'b dg';
+            stBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Ditolak`;
+          }
+          tr.setAttribute('data-st', 'Ditolak');
+          const actionCell = tr.querySelector('td:last-child');
+          if (actionCell) {
+            actionCell.innerHTML = `<span class="b dg">Ditolak</span>`;
+          }
+        } else {
+          const containerRow = btn.parentElement;
+          if (containerRow) {
+            containerRow.innerHTML = `<span class="b dg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Ditolak</span>`;
+          }
         }
-        btn.remove();
-        toast('Reservasi telah ditolak', 'wn');
+        toast(`Reservasi ${id} telah ditolak`, 'wn');
       }]
     ]);
   },
@@ -169,17 +193,7 @@ const Actions = {
 
   // Perpanjang membership
   renew: () => {
-    M('Perpanjang Membership?', '<p>Sesi akan direset ke 10 dan masa berlaku diperpanjang 1 tahun (simulasi).</p>', [
-      ['Batal', 'ghost'],
-      ['Ya, perpanjang', 'cta', () => {
-        toast('Membership berhasil diperpanjang 1 tahun (+50 poin)', 'ok');
-      }]
-    ]);
-  },
-
-  // Gunakan 1 sesi membership
-  useSes: btn => {
-    toast('1 sesi terpakai! +20 poin poin loyalitas berhasil ditambahkan.', 'ok');
+    window.location.href = 'bayar-membership.html';
   },
 
   // Simulasi pesan WhatsApp
@@ -205,31 +219,108 @@ const Actions = {
   // Balas ulasan
   reply: btn => {
     const id = btn.dataset.v;
-    M(`Balas Ulasan (${id})`, `
+    const card = btn.closest('.card') || $(`#card-${id}`);
+    const customerName = card?.querySelector('b')?.textContent || 'Pelanggan';
+
+    M(`Balas Ulasan — ${esc(customerName)}`, `
       <div class="fld">
-        <label for="reply-text">Tulis balasan untuk pelanggan</label>
-        <textarea id="reply-text" rows="4" placeholder="Halo, terima kasih banyak atas ulasannya..."></textarea>
+        <label for="reply-text">Tulis balasan resmi Petsaga untuk ${esc(customerName)}</label>
+        <textarea id="reply-text" rows="4" placeholder="Halo ${esc(customerName)}, terima kasih banyak atas masukannya..."></textarea>
       </div>
     `, [
       ['Batal', 'ghost'],
       ['Kirim Balasan', 'cta', () => {
         const txt = $('#reply-text')?.value.trim();
         if (!txt || txt.length < 5) {
-          toast('Balasan minimal 5 karakter', 'dg');
+          toast('Tulis balasan minimal 5 karakter', 'dg');
           return false;
         }
-        btn.disabled = true;
-        btn.textContent = 'Dibalas';
-        toast('Balasan tersimpan (simulasi)', 'ok');
+
+        if (card) {
+          // Update status data attribute for filter
+          card.setAttribute('data-status', 'replied');
+
+          // Append or update admin-reply-box
+          let replyBox = card.querySelector('.admin-reply-box');
+          if (!replyBox) {
+            replyBox = document.createElement('div');
+            replyBox.className = 'admin-reply-box';
+            replyBox.style.marginTop = '12px';
+            card.appendChild(replyBox);
+          }
+          replyBox.innerHTML = `
+            <small style="font-weight:700;color:var(--brand-teal);display:flex;align-items:center;gap:6px;margin-bottom:4px">
+              <svg style="width:14px;height:14px;display:inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
+              Balasan Resmi Tim Petsaga
+            </small>
+            <p style="margin:0;font-size:0.92rem;color:var(--tx)">${esc(txt)}</p>
+          `;
+
+          // Update status badge
+          const statusSpan = card.querySelector(`#st-${id}`) || card.querySelector('.row small span.b');
+          if (statusSpan) {
+            statusSpan.className = 'b ok';
+            statusSpan.textContent = 'Sudah dibalas';
+          }
+
+          // Replace buttons with final badge
+          const actionRow = card.querySelector(`#act-${id}`) || card.querySelector('.row:last-of-type');
+          if (actionRow) {
+            const btnGroup = actionRow.querySelector('.row');
+            if (btnGroup) {
+              btnGroup.innerHTML = `
+                <span class="b ok" style="display:flex;align-items:center;gap:4px">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg>
+                  Sudah Dibalas
+                </span>
+              `;
+            }
+          }
+
+          // Refresh counts and filter
+          if (typeof window.refreshReviewCounts === 'function') {
+            window.refreshReviewCounts();
+            const activeFilter = document.querySelector('.filter-btn.on')?.getAttribute('data-filter');
+            if (activeFilter === 'unreplied') {
+              card.style.display = 'none';
+            }
+          }
+        }
+
+        toast('Balasan resmi berhasil dikirim & ditampilkan!', 'ok');
       }]
     ]);
   },
 
   // Tandai ulasan selesai
   done: btn => {
-    btn.disabled = true;
-    btn.textContent = '✓ Selesai';
-    toast('Ulasan ditandai selesai', 'ok');
+    const id = btn.dataset.v;
+    const card = btn.closest('.card') || $(`#card-${id}`);
+    if (card) {
+      card.setAttribute('data-status', 'replied');
+      const statusSpan = card.querySelector(`#st-${id}`) || card.querySelector('.row small span.b');
+      if (statusSpan) {
+        statusSpan.className = 'b ok';
+        statusSpan.textContent = 'Selesai ditangani';
+      }
+      const actionGroup = btn.parentElement;
+      if (actionGroup) {
+        actionGroup.innerHTML = `
+          <span class="b ok" style="display:flex;align-items:center;gap:4px">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px"><polyline points="20 6 9 17 4 12"/></svg>
+            Selesai Ditangani
+          </span>
+        `;
+      }
+      if (typeof window.refreshReviewCounts === 'function') {
+        window.refreshReviewCounts();
+        const activeFilter = document.querySelector('.filter-btn.on')?.getAttribute('data-filter');
+        if (activeFilter === 'unreplied') {
+          card.style.display = 'none';
+        }
+      }
+    }
+    toast('Ulasan ditandai selesai ditangani', 'ok');
   }
 };
 
@@ -247,8 +338,43 @@ document.addEventListener('submit', e => {
     toast('Booking Grooming terkirim! Menunggu konfirmasi admin.', 'ok');
   } else if (form.id === 'fPet') {
     const name = form.elements.n?.value.trim() || 'Hewan';
-    toast(`Profil ${name} berhasil ditambahkan!`, 'ok');
+    let petType = form.elements.t?.value || 'Hewan';
+    if (petType === 'Lainnya') {
+      const otherVal = form.elements.otherType?.value.trim();
+      if (otherVal) petType = otherVal;
+    }
+    toast(`Profil ${name} (${petType}) berhasil ditambahkan!`, 'ok');
+
+    // Dynamically append new card to #list if on hewan.html
+    const list = $('#list');
+    if (list) {
+      const newCard = document.createElement('div');
+      newCard.className = 'card interactive';
+      newCard.style.cssText = 'border-left:5px solid var(--brand-gold);border-radius:18px;margin-top:14px';
+      newCard.innerHTML = `
+        <div class="row" style="justify-content:space-between;margin-bottom:10px">
+          <div class="row" style="gap:12px">
+            <div class="card-icon" style="background:#FFF7ED;color:var(--brand-gold);border:1px solid #FED7AA;width:40px;height:40px">
+              <svg style="width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+            </div>
+            <div>
+              <h3 style="margin:0;color:var(--brand-teal)">${esc(name)}</h3>
+              <small class="mut">${esc(petType)} · ${esc(form.elements.a?.value || '1 tahun')}</small>
+            </div>
+          </div>
+          <span class="b ok">
+            <svg style="width:14px;height:14px;display:inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            ${esc(form.elements.v?.value || 'Lengkap')}
+          </span>
+        </div>
+        <p style="margin-top:12px"><b>Alergi:</b> <span class="mut">${esc(form.elements.al?.value || 'Tidak ada')}</span></p>
+        <p><b>Karakter:</b> ${esc(form.elements.tp?.value || 'Sehat dan lincah')}</p>
+      `;
+      list.appendChild(newCard);
+    }
     form.reset();
+    const fldOther = $('#fldOtherPet');
+    if (fldOther) fldOther.style.display = 'none';
   } else if (form.id === 'fFb') {
     toast('Terima kasih atas ulasan & feedback Anda!', 'ok');
     form.reset();

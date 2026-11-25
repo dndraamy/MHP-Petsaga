@@ -53,15 +53,7 @@
 <!-- Header / Top Bar -->
 <header>
   <a href="admin-dashboard.html" class="brand">
-    <div class="brand-badge">
-      <svg viewBox="0 0 24 24">
-        <circle cx="7" cy="8.5" r="2.2"/>
-        <circle cx="17" cy="8.5" r="2.2"/>
-        <circle cx="10" cy="5" r="2.2"/>
-        <circle cx="14" cy="5" r="2.2"/>
-        <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
-      </svg>
-    </div>
+    <img src="img/logo.png" alt="Logo Petsaga" class="brand-logo-img">
     <div class="brand-text">
       <span class="title">petsaga</span>
       <small>Panel Administrasi</small>
@@ -81,10 +73,6 @@
       <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
       Keluar
     </a>
-    <button class="btn sm ghost" data-action="reset" title="Kembalikan semua data ke kondisi awal">
-      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-      Reset Demo
-    </button>
   </div>
 </header>
 
@@ -115,10 +103,6 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
       <em>Pengingat</em>
     </a>
-    <a href="admin-kpi.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-      <em>Laporan KPI</em>
-    </a>
 
     <div class="user-pill">
       <div class="user-avatar" style="background:linear-gradient(135deg, #D1E7DC 0%, #A3C9B8 100%)">
@@ -135,13 +119,9 @@
   <main id="main" tabindex="-1">
     <div class="row" style="justify-content:space-between;margin-bottom:20px">
       <div>
-        <h1 style="margin:0 0 4px">Ringkasan Operasional Harian</h1>
-        <small class="mut">Pantau arus reservasi, kapasitas Cat Cafe &amp; kepuasan pelanggan hari ini.</small>
+        <h1 style="margin:0 0 4px">Ringkasan Operasional &amp; Indikator Kinerja (KPI)</h1>
+        <small class="mut">Pantau arus reservasi, retensi kunjungan berulang &amp; kepuasan pelanggan secara real-time.</small>
       </div>
-      <span class="b ok">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        Sistem Aktif Normal
-      </span>
     </div>
 
     <!-- Metric Counters Grid -->
@@ -162,12 +142,6 @@
         <small class="mut">Terkonfirmasi</small>
         <div class="met" style="color:var(--ok)">3</div>
         <small>Siap dilayani</small>
-      </div>
-
-      <div class="card interactive" style="border-top:3px solid var(--in)">
-        <small class="mut">Pelanggan Aktif</small>
-        <div class="met" style="color:var(--in)">6</div>
-        <small>Database CRM</small>
       </div>
 
       <div class="card interactive" style="border-top:3px solid var(--dg)">
@@ -273,89 +247,167 @@
       </div>
     </div>
 
-    <!-- Kuota Cat Cafe Hari Ini -->
-    <div class="card" style="margin-top:24px">
-      <div class="row" style="justify-content:space-between;margin-bottom:14px;border-bottom:1px solid var(--bd);padding-bottom:10px">
+    <!-- ======================================================================
+         LAPORAN KPI & INDIKATOR KINERJA BISNIS (TERINTEGRASI DI DASHBOARD)
+         ====================================================================== -->
+    <div class="row" style="justify-content:space-between;margin:32px 0 16px;border-top:1px solid var(--bd);padding-top:24px;flex-wrap:wrap;gap:12px">
+      <div>
+        <h2 style="font-size:1.35rem;margin:0 0 4px;color:var(--brand-teal)">Analisis Kinerja Tahunan &amp; Indikator KPI</h2>
+        <small class="mut">Ringkasan tren pendapatan bulanan dan persentase tingkat kunjungan berulang (repeat visit).</small>
+      </div>
+      <div class="row" style="gap:10px">
+        <label for="selectKpiYear" class="mut" style="font-size:0.88rem;font-weight:600;margin:0">Tahun Laporan:</label>
+        <select id="selectKpiYear" style="padding:6px 14px;border-radius:10px;border:1.5px solid var(--brand-teal);font-weight:700;color:var(--brand-teal);background:#FFFFFF;cursor:pointer">
+          <option value="2026" selected>Tahun 2026 (Berjalan)</option>
+          <option value="2025">Tahun 2025</option>
+          <option value="2024">Tahun 2024</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Ringkasan Angka KPI Tahunan -->
+    <div class="grid" style="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:16px;margin-bottom:20px">
+      <!-- Metrik 1: Total Pendapatan Tahunan -->
+      <div class="card interactive" style="border-top:4px solid var(--brand-gold)">
+        <small class="mut">Total Pendapatan <span class="lblYearDisplay">2026</span></small>
+        <div class="met" id="valTotalRevenue" style="color:var(--brand-gold);font-size:1.6rem">Rp 361.0 Jt</div>
+        <small style="color:var(--ok);font-weight:600;display:flex;align-items:center;gap:4px;margin-top:6px" id="lblRevenueGrowth">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          +22.3% YoY
+        </small>
+      </div>
+
+      <!-- Metrik 2: Rata-rata Kunjungan Berulang -->
+      <div class="card interactive" style="border-top:4px solid var(--brand-teal)">
+        <small class="mut">Rata-rata Repeat Visit <span class="lblYearDisplay">2026</span></small>
+        <div class="met" id="valAvgRepeat" style="color:var(--brand-teal);font-size:1.6rem">67.2%</div>
+        <small style="color:var(--ok);font-weight:600;display:flex;align-items:center;gap:4px;margin-top:6px" id="lblRepeatGrowth">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+          Performa Sangat Kuat
+        </small>
+      </div>
+
+      <!-- Metrik 3: Rating Pelanggan -->
+      <div class="card interactive" style="border-top:4px solid #F59E0B">
+        <small class="mut">Rating Rata-rata Pelanggan</small>
+        <div class="met flex items-center gap-1" style="color:#D97706;font-size:1.6rem">
+          4.6 <span style="font-size:0.95rem;color:var(--tx2);font-weight:600">/ 5.0</span>
+        </div>
+        <small class="mut" style="margin-top:6px;display:block">Akumulasi ulasan Cat Cafe &amp; Salon</small>
+      </div>
+
+      <!-- Metrik 4: Member VIP Aktif -->
+      <div class="card interactive" style="border-top:4px solid #6366F1">
+        <small class="mut">Retensi Member VIP</small>
+        <div class="met" style="color:#6366F1;font-size:1.6rem">3 <span style="font-size:0.95rem;color:var(--tx2);font-weight:600">Member</span></div>
+        <small class="mut" style="margin-top:6px;display:block">50% pelanggan berlangganan VIP</small>
+      </div>
+    </div>
+
+    <!-- GRAFIK 1: PENDAPATAN BULANAN (DALAM SATU TAHUN) -->
+    <div class="chart-box">
+      <div class="row" style="justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
         <div>
-          <h3 style="margin:0">Kontrol Kuota Cat Cafe Hari Ini</h3>
-          <small class="mut">Batas kuota pengunjung per slot sesi bermain (klik +/− untuk mengatur batas).</small>
+          <h3 style="margin:0;color:var(--brand-teal);font-size:1.1rem;display:flex;align-items:center;gap:8px">
+            <svg class="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            Grafik Pendapatan Bulanan — <span class="lblYearDisplay">2026</span>
+          </h3>
+          <small class="mut">Distribusi omset pendapatan Cat Cafe, Salon Grooming &amp; VIP Membership per bulan (dalam Juta Rupiah).</small>
         </div>
-        <span class="b in">Total Kapasitas: 40 Orang</span>
+        <span class="b ok" id="badgeRevenueSummary">Total: Rp 361.000.000</span>
       </div>
 
-      <!-- Slot 10:00 -->
-      <div style="margin:16px 0">
-        <div class="row" style="justify-content:space-between;margin-bottom:6px">
-          <b>10:00 – 11:30 WIB</b>
-          <span class="row" style="gap:6px">
-            <b id="cap-text-10">5/8 terisi</b>
-            <button class="btn sm ghost" data-action="cap" data-v="10:00|-1" aria-label="Kurangi kuota">−</button>
-            <button class="btn sm ghost" data-action="cap" data-v="10:00|1" aria-label="Tambah kuota">+</button>
-          </span>
+      <!-- Bar Chart Container -->
+      <div class="chart-bars-wrap" id="wrapRevenueChart">
+        <!-- Bars will be populated dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- GRAFIK 2: TINGKAT KUNJUNGAN BERULANG (REPEAT VISIT RATE) BULANAN -->
+    <div class="chart-box" style="margin-top:20px">
+      <div class="row" style="justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <div>
+          <h3 style="margin:0;color:var(--brand-teal);font-size:1.1rem;display:flex;align-items:center;gap:8px">
+            <svg class="w-5 h-5 text-teal-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Grafik Tingkat Kunjungan Berulang (Repeat Visit Rate) — <span class="lblYearDisplay">2026</span>
+          </h3>
+          <small class="mut">Persentase pelanggan lama yang melakukan kunjungan kembali ke salon grooming / cafe setiap bulannya.</small>
         </div>
-        <div class="bar" role="progressbar" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
-          <i style="width:62.5%;background:var(--cafe)"></i>
-        </div>
+        <span class="b in" id="badgeRepeatSummary">Rata-rata: 67.2%</span>
       </div>
 
-      <!-- Slot 12:00 -->
-      <div style="margin:16px 0">
-        <div class="row" style="justify-content:space-between;margin-bottom:6px">
-          <b>12:00 – 13:30 WIB</b>
-          <span class="row" style="gap:6px">
-            <b id="cap-text-12">0/8 terisi</b>
-            <button class="btn sm ghost" data-action="cap" data-v="12:00|-1" aria-label="Kurangi kuota">−</button>
-            <button class="btn sm ghost" data-action="cap" data-v="12:00|1" aria-label="Tambah kuota">+</button>
-          </span>
+      <!-- Bar Chart Container -->
+      <div class="chart-bars-wrap" id="wrapRepeatChart">
+        <!-- Bars will be populated dynamically by JS -->
+      </div>
+    </div>
+
+    <!-- Sebaran Rating Bintang (Pure HTML) -->
+    <div class="card" style="margin-top:24px;border-radius:18px">
+      <div class="row" style="justify-content:space-between;margin-bottom:14px;border-bottom:1px solid var(--bd);padding-bottom:12px">
+        <div class="flex items-center gap-2">
+          <div class="card-icon" style="background:#FFF7ED;color:var(--brand-gold);width:30px;height:30px;border:1px solid #FED7AA">
+            <svg class="w-4 h-4 fill-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3 style="margin:0;font-size:1.1rem;color:var(--brand-teal)">Distribusi Sebaran Rating Bintang Pelanggan</h3>
         </div>
-        <div class="bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <i style="width:0%;background:var(--cafe)"></i>
-        </div>
+        <span class="b cafe">Total 6 Ulasan Masuk</span>
       </div>
 
-      <!-- Slot 14:00 -->
-      <div style="margin:16px 0">
-        <div class="row" style="justify-content:space-between;margin-bottom:6px">
-          <b>14:00 – 15:30 WIB</b>
-          <span class="row" style="gap:6px">
-            <b id="cap-text-14">4/8 terisi</b>
-            <button class="btn sm ghost" data-action="cap" data-v="14:00|-1" aria-label="Kurangi kuota">−</button>
-            <button class="btn sm ghost" data-action="cap" data-v="14:00|1" aria-label="Tambah kuota">+</button>
-          </span>
+      <!-- 5 Stars -->
+      <div class="row" style="margin:12px 0">
+        <span style="width:90px;font-weight:600;display:flex;align-items:center;gap:4px">
+          5 Bintang
+          <svg class="w-3.5 h-3.5 fill-amber-400" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <div style="flex:1">
+          <div class="bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+            <i style="width:50%;background:var(--ok)"></i>
+          </div>
         </div>
-        <div class="bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
-          <i style="width:50%;background:var(--cafe)"></i>
-        </div>
+        <span style="min-width:75px;text-align:right"><b>3</b> (50%)</span>
       </div>
 
-      <!-- Slot 16:00 -->
-      <div style="margin:16px 0">
-        <div class="row" style="justify-content:space-between;margin-bottom:6px">
-          <b>16:00 – 17:30 WIB</b>
-          <span class="row" style="gap:6px">
-            <b id="cap-text-16">0/8 terisi</b>
-            <button class="btn sm ghost" data-action="cap" data-v="16:00|-1" aria-label="Kurangi kuota">−</button>
-            <button class="btn sm ghost" data-action="cap" data-v="16:00|1" aria-label="Tambah kuota">+</button>
-          </span>
+      <!-- 4 Stars -->
+      <div class="row" style="margin:12px 0">
+        <span style="width:90px;font-weight:600;display:flex;align-items:center;gap:4px">
+          4 Bintang
+          <svg class="w-3.5 h-3.5 fill-amber-400" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <div style="flex:1">
+          <div class="bar" role="progressbar" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100">
+            <i style="width:16.7%;background:var(--ok)"></i>
+          </div>
         </div>
-        <div class="bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <i style="width:0%;background:var(--cafe)"></i>
-        </div>
+        <span style="min-width:75px;text-align:right"><b>1</b> (16.7%)</span>
       </div>
 
-      <!-- Slot 18:00 -->
-      <div style="margin:16px 0">
-        <div class="row" style="justify-content:space-between;margin-bottom:6px">
-          <b>18:00 – 19:30 WIB</b>
-          <span class="row" style="gap:6px">
-            <b id="cap-text-18">0/8 terisi</b>
-            <button class="btn sm ghost" data-action="cap" data-v="18:00|-1" aria-label="Kurangi kuota">−</button>
-            <button class="btn sm ghost" data-action="cap" data-v="18:00|1" aria-label="Tambah kuota">+</button>
-          </span>
+      <!-- 3 Stars -->
+      <div class="row" style="margin:12px 0">
+        <span style="width:90px;font-weight:600;display:flex;align-items:center;gap:4px">
+          3 Bintang
+          <svg class="w-3.5 h-3.5 fill-amber-400" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <div style="flex:1">
+          <div class="bar" role="progressbar" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100">
+            <i style="width:16.7%;background:#F59E0B"></i>
+          </div>
         </div>
-        <div class="bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <i style="width:0%;background:var(--cafe)"></i>
+        <span style="min-width:75px;text-align:right"><b>1</b> (16.7%)</span>
+      </div>
+
+      <!-- 1-2 Stars -->
+      <div class="row" style="margin:12px 0">
+        <span style="width:90px;font-weight:600;display:flex;align-items:center;gap:4px">
+          1–2 Bintang
+          <svg class="w-3.5 h-3.5 fill-amber-400" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <div style="flex:1">
+          <div class="bar" role="progressbar" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100">
+            <i style="width:16.7%;background:var(--dg)"></i>
+          </div>
         </div>
+        <span style="min-width:75px;text-align:right"><b>1</b> (16.7%)</span>
       </div>
     </div>
   </main>
@@ -375,5 +427,109 @@
 
 <script src="data/dummy-data.js"></script>
 <script src="js/core.js"></script>
+<script>
+  const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
+  const kpiData = {
+    '2026': {
+      totalRevenue: 'Rp 361.0 Jt',
+      revenueGrowth: '+22.3% YoY',
+      avgRepeat: '67.2%',
+      repeatGrowth: 'Performa Sangat Kuat',
+      revenueBadge: 'Total: Rp 361.000.000',
+      repeatBadge: 'Rata-rata: 67.2%',
+      revenue: [18.5, 21.0, 24.5, 28.0, 26.5, 31.0, 33.5, 30.0, 32.5, 35.0, 38.5, 42.0],
+      repeat: [55, 58, 60, 65, 64, 68, 70, 69, 71, 70, 72, 75]
+    },
+    '2025': {
+      totalRevenue: 'Rp 291.0 Jt',
+      revenueGrowth: '+38.5% YoY',
+      avgRepeat: '57.7%',
+      repeatGrowth: '+8.3% vs 2024',
+      revenueBadge: 'Total: Rp 291.000.000',
+      repeatBadge: 'Rata-rata: 57.7%',
+      revenue: [14.0, 16.5, 19.0, 22.0, 21.5, 25.0, 26.5, 24.0, 27.0, 29.5, 31.0, 35.0],
+      repeat: [48, 50, 53, 56, 55, 58, 60, 59, 62, 61, 64, 66]
+    },
+    '2024': {
+      totalRevenue: 'Rp 210.0 Jt',
+      revenueGrowth: 'Tahun Awal Beroperasi',
+      avgRepeat: '49.4%',
+      repeatGrowth: 'Baseline Operasional',
+      revenueBadge: 'Total: Rp 210.000.000',
+      repeatBadge: 'Rata-rata: 49.4%',
+      revenue: [10.0, 11.5, 13.0, 15.5, 14.0, 17.5, 19.0, 18.0, 20.0, 21.5, 23.0, 27.0],
+      repeat: [40, 42, 45, 47, 46, 50, 52, 51, 53, 54, 55, 58]
+    }
+  };
+
+  function updateKpiCharts(year) {
+    const data = kpiData[year] || kpiData['2026'];
+
+    // Update year labels
+    document.querySelectorAll('.lblYearDisplay').forEach(el => {
+      el.textContent = year;
+    });
+
+    // Update summary stat cards
+    const valTotalRevenue = document.getElementById('valTotalRevenue');
+    if (valTotalRevenue) valTotalRevenue.textContent = data.totalRevenue;
+
+    const lblRevenueGrowth = document.getElementById('lblRevenueGrowth');
+    if (lblRevenueGrowth) lblRevenueGrowth.innerHTML = `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg> ${data.revenueGrowth}`;
+
+    const valAvgRepeat = document.getElementById('valAvgRepeat');
+    if (valAvgRepeat) valAvgRepeat.textContent = data.avgRepeat;
+
+    const lblRepeatGrowth = document.getElementById('lblRepeatGrowth');
+    if (lblRepeatGrowth) lblRepeatGrowth.innerHTML = `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg> ${data.repeatGrowth}`;
+
+    const badgeRevenueSummary = document.getElementById('badgeRevenueSummary');
+    if (badgeRevenueSummary) badgeRevenueSummary.textContent = data.revenueBadge;
+
+    const badgeRepeatSummary = document.getElementById('badgeRepeatSummary');
+    if (badgeRepeatSummary) badgeRepeatSummary.textContent = data.repeatBadge;
+
+    // Render Revenue Chart (Max scale = 50 Jt)
+    const wrapRevenue = document.getElementById('wrapRevenueChart');
+    if (wrapRevenue) {
+      const maxRev = 50;
+      wrapRevenue.innerHTML = data.revenue.map((val, i) => {
+        const pct = Math.min(100, Math.round((val / maxRev) * 100));
+        return `
+          <div class="chart-col">
+            <span class="chart-val">${val.toFixed(1)}</span>
+            <div class="chart-bar-pillar" style="height:${pct}%;background:linear-gradient(180deg, var(--brand-gold) 0%, #D97706 100%)" title="${MONTHS[i]} ${year}: Rp ${val} Juta"></div>
+            <span class="chart-lbl">${MONTHS[i]}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render Repeat Visit Chart (Max scale = 100%)
+    const wrapRepeat = document.getElementById('wrapRepeatChart');
+    if (wrapRepeat) {
+      wrapRepeat.innerHTML = data.repeat.map((val, i) => {
+        return `
+          <div class="chart-col">
+            <span class="chart-val">${val}%</span>
+            <div class="chart-bar-pillar" style="height:${val}%;background:linear-gradient(180deg, var(--brand-teal) 0%, #0F766E 100%)" title="${MONTHS[i]} ${year}: ${val}% Pelanggan Berulang"></div>
+            <span class="chart-lbl">${MONTHS[i]}</span>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const selectYear = document.getElementById('selectKpiYear');
+    if (selectYear) {
+      selectYear.addEventListener('change', e => {
+        updateKpiCharts(e.target.value);
+      });
+    }
+    updateKpiCharts('2026');
+  });
+</script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VIP Membership Card — Petsaga</title>
+<title>VIP Membership — Petsaga</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -36,15 +36,7 @@
 <!-- Header / Top Bar -->
 <header>
   <a href="index.html" class="brand">
-    <div class="brand-badge">
-      <svg viewBox="0 0 24 24">
-        <circle cx="7" cy="8.5" r="2.2"/>
-        <circle cx="17" cy="8.5" r="2.2"/>
-        <circle cx="10" cy="5" r="2.2"/>
-        <circle cx="14" cy="5" r="2.2"/>
-        <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
-      </svg>
-    </div>
+    <img src="img/logo.png" alt="Logo Petsaga" class="brand-logo-img">
     <div class="brand-text">
       <span class="title">petsaga</span>
       <small>Cat Cafe &amp; Pet Grooming</small>
@@ -66,17 +58,18 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       <span>Portal Admin</span>
     </a>
-    <button class="btn sm ghost" data-action="reset" title="Kembalikan semua data ke kondisi awal">
-      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-      Reset Demo
-    </button>
   </div>
 </header>
 
-<!-- Prototype Simulation Banner -->
-<div class="sim">
-  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-  <span>Kartu VIP Digital interaktif: gunakan sesi atau perpanjang masa berlaku dalam simulasi.</span>
+<!-- Prototype Simulation Banner with State Switcher -->
+<div class="sim" style="justify-content:space-between">
+  <div class="row" style="gap:8px">
+    <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    <span id="simBannerText">Mode Member Aktif: Kartu fisik VIP dan kuota 10 sesi grooming Anda siap digunakan.</span>
+  </div>
+  <button id="btnToggleMemberState" class="btn sm ghost" style="padding:4px 10px;font-size:0.75rem;background:#FFFFFF;border-color:var(--brand-teal);color:var(--brand-teal)">
+    Beralih ke Tampilan: Belum Member
+  </button>
 </div>
 
 <!-- Main App Layout -->
@@ -117,175 +110,294 @@
         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </div>
       <div style="min-width:0;flex:1">
-        <div style="font-weight:700;font-size:0.92rem;color:var(--tx)">Aulia Rahma</div>
-        <small class="b ok" style="padding:1px 8px;font-size:0.72rem">Member Aktif</small>
+        <div style="font-weight:700;font-size:0.92rem;color:var(--tx)" id="sidebarUserName">Aulia Rahma</div>
+        <small class="b ok" id="sidebarUserBadge" style="padding:1px 8px;font-size:0.72rem">Member Aktif</small>
       </div>
     </div>
   </nav>
 
   <!-- Page Main Content -->
   <main id="main" tabindex="-1">
-    <div class="row" style="justify-content:space-between;margin-bottom:20px">
-      <div>
-        <h1 style="margin:0 0 4px;color:var(--brand-teal)">VIP Membership Card</h1>
-        <small class="mut">Kartu loyalitas fisik digital dengan kuota sesi kunjungan &amp; reward.</small>
-      </div>
-      <span class="b ok flex items-center gap-1.5">
-        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-        Status: Aktif
-      </span>
-    </div>
 
     <!-- ======================================================================
-         REALISTIC PHYSICAL VIP MEMBERSHIP CARD (BENTUK KARTU ASLI)
+         TAMPILAN 1: BELUM MENJADI MEMBER (FORM PENDAFTARAN & AJAKAN GABUNG)
          ====================================================================== -->
-    <div class="physical-card-container">
-      <div class="physical-card" id="physicalVipCard">
-        <!-- Glossy Reflection Sheen -->
-        <div class="card-shine"></div>
+    <div id="viewUnregisteredMember" style="display:none">
+      <div class="row" style="justify-content:space-between;margin-bottom:20px">
+        <div>
+          <h1 style="margin:0 0 4px;color:var(--brand-teal)">Daftar VIP Membership Petsaga</h1>
+          <small class="mut">Nikmati paket perawatan hemat hanya Rp70.000 / kucing (harga reguler Rp75.000 – Rp90.000) dengan kuota 10 sesi tahunan.</small>
+        </div>
+        <span class="b wn">Status: Belum Terdaftar</span>
+      </div>
 
-        <!-- Card Top Bar: EMV Chip, NFC & Logo -->
-        <div class="card-top">
-          <div style="display:flex;align-items:center">
-            <!-- Golden EMV Chip with Circuit Grid -->
-            <div class="card-emv-chip" title="EMV Smart Chip">
-              <div></div><div></div><div></div><div></div>
-            </div>
-            <!-- Contactless NFC Wave Icon -->
-            <svg class="card-nfc w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round">
-              <path d="M8.5 16.5a5 5 0 0 1 0-7"/>
-              <path d="M12 19a8.5 8.5 0 0 1 0-12"/>
-              <path d="M15.5 21.5a12 12 0 0 1 0-17"/>
-            </svg>
+      <!-- Hero Card Ajakan -->
+      <div class="card" style="background:#FFF7ED;border-color:#FED7AA;display:flex;align-items:center;gap:18px;margin-bottom:24px">
+        <div class="card-icon" style="background:#FFFFFF;color:var(--brand-gold);border:1px solid #FED7AA;flex-shrink:0;width:48px;height:48px">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        </div>
+        <div>
+          <h3 style="margin:0 0 4px;color:var(--brand-teal)">Spesial &amp; Lebih Hemat untuk Kucing Kesayangan</h3>
+          <p class="mut" style="margin:0;font-size:0.95rem;line-height:1.5">
+            Daftar sekarang seharga <b>Rp700.000 per tahun</b> dan dapatkan kuota <b>10 kali Basic Grooming</b> (jatuhnya hanya <b>Rp70.000 / kucing</b> dibandingkan harga reguler non-member <b>Rp75.000 – Rp90.000</b>). Berlaku 1 tahun penuh: <b>25 Nov 2026 – 25 Nov 2027</b>!
+          </p>
+        </div>
+      </div>
+
+      <!-- Form Pendaftaran Member Baru (Pure HTML) -->
+      <form class="card" id="fRegisterMember" style="border-radius:20px;border:1.5px solid var(--bd)" novalidate>
+        <div class="row" style="justify-content:space-between;margin-bottom:18px;border-bottom:1px solid var(--bd);padding-bottom:12px">
+          <h3 style="margin:0;color:var(--brand-teal)">Formulir Pendaftaran VIP Member</h3>
+          <span class="b cafe">Biaya: Rp700.000 / Tahun</span>
+        </div>
+
+        <div class="frm">
+          <div class="fld">
+            <label for="regName">Nama Lengkap Pemilik Anabul</label>
+            <input id="regName" name="name" type="text" placeholder="Masukkan nama Anda" value="Aulia Rahma" required>
           </div>
 
-          <!-- Top Right Branding -->
-          <div class="card-brand-badge">
-            <div style="display:flex;flex-direction:column;align-items:flex-end">
-              <span class="tier">VIP GOLD PASS</span>
-              <span class="logo-name">petsaga</span>
+          <div class="fld">
+            <label for="regCardNum">Nomor Kartu Member (Digital ID)</label>
+            <input id="regCardNum" name="cardNum" type="text" value="8024 4219 8820 1049" readonly style="background:#F8FAFC;font-family:'Space Mono',monospace;letter-spacing:1px;font-weight:700">
+            <small class="mut" style="font-size:0.75rem;margin-top:4px">Nomor kartu diterbitkan otomatis oleh sistem Petsaga.</small>
+          </div>
+
+          <div class="fld">
+            <label for="regPhone">Nomor WhatsApp / Handphone</label>
+            <input id="regPhone" name="phone" type="tel" placeholder="Contoh: 081234567890" value="081200000001" required>
+          </div>
+
+          <div class="fld">
+            <label for="regPetName">Nama Kucing yang Sering Digrooming</label>
+            <input id="regPetName" name="petName" type="text" placeholder="Contoh: Mochi & Susu" value="Mochi">
+          </div>
+
+          <div class="fld full" style="margin-top:6px">
+            <div style="background:var(--sec);padding:14px 16px;border-radius:12px;border:1px solid var(--bd);font-size:0.88rem;color:var(--tx2);line-height:1.6">
+              <b style="color:var(--brand-teal);display:block;margin-bottom:4px">Ketentuan Kuota &amp; Pemakaian:</b>
+              • Kuota 10x sesi Basic Grooming untuk kucing (short hair &amp; long hair maks BB 10 kg).<br>
+              • Masa berlaku resmi: <b>25 Nov 2026 – 25 Nov 2027</b> (1 tahun penuh). Jika dalam 1 tahun kuota tidak terpakai, otomatis hangus.<br>
+              • Harga paket jatuhnya <b>Rp70.000 per kucing</b> (harga reguler salon non-member berkisar Rp75.000 – Rp90.000).<br>
+              • 1 sesi kuota = 1 ekor kucing. Jika Anda membawa 5 kucing sekaligus dalam 1 kali kunjungan, kuota otomatis langsung terpotong 5 sesi (bukan 1 sesi).<br>
+              • Tambahan biaya untuk BB &gt; 10 kg atau upgrade paket grooming di luar basic akan diselesaikan langsung di kasir salon saat kunjungan.
             </div>
-            <div class="brand-badge" style="width:34px;height:34px;box-shadow:none">
-              <svg viewBox="0 0 24 24" style="width:18px;height:18px">
-                <circle cx="7" cy="8.5" r="2.2"/><circle cx="17" cy="8.5" r="2.2"/>
-                <circle cx="10" cy="5" r="2.2"/><circle cx="14" cy="5" r="2.2"/>
-                <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top:24px;justify-content:flex-end">
+          <button class="btn cta lg" type="submit" style="padding:14px 32px;font-size:1.02rem">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+            Lanjut ke Pembayaran Rp700.000
+          </button>
+        </div>
+      </form>
+
+      <!-- Benefit Eksklusif Card -->
+      <div class="card" style="margin-top:24px">
+        <h3 style="color:var(--brand-teal);margin-bottom:16px">Manfaat Eksklusif Menjadi VIP Member Petsaga</h3>
+        <div class="grid" style="margin:0;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:20px">
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div class="card-icon" style="background:#F0FDFD;color:var(--brand-teal);border:1px solid #CCFBF1;flex-shrink:0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <b style="color:var(--tx);font-size:0.95rem">10x Sesi Basic Grooming Kucing</b>
+              <p class="mut" style="font-size:0.85rem;margin:4px 0 0">Khusus kucing short hair &amp; long hair hingga berat badan 10 kg (hanya Rp70.000 / kucing vs harga reguler Rp75.000 – Rp90.000).</p>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div class="card-icon" style="background:#FFF7ED;color:var(--brand-gold);border:1px solid #FED7AA;flex-shrink:0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            </div>
+            <div>
+              <b style="color:var(--tx);font-size:0.95rem">Gift Makanan Anabul Saat Perpanjangan</b>
+              <p class="mut" style="font-size:0.85rem;margin:4px 0 0">Setelah 10 sesi habis, Anda berhak mendapatkan hadiah makanan kucing premium gratis saat memperpanjang paket.</p>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:14px;align-items:flex-start">
+            <div class="card-icon" style="background:#FEF3C7;color:#D97706;border:1px solid #FDE68A;flex-shrink:0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <div>
+              <b style="color:var(--tx);font-size:0.95rem">Goodie Bag Eksklusif Petsaga</b>
+              <p class="mut" style="font-size:0.85rem;margin:4px 0 0">Kesempatan undian merchandise dan goodie bag eksklusif bagi member VIP Petsaga yang beruntung.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ======================================================================
+         TAMPILAN 2: SUDAH MENJADI MEMBER (KARTU FISIK VIP & KUOTA PEMAKAIAN)
+         ====================================================================== -->
+    <div id="viewActiveMember">
+      <div class="row" style="justify-content:space-between;margin-bottom:20px">
+        <div>
+          <h1 style="margin:0 0 4px;color:var(--brand-teal)">VIP Membership Card</h1>
+          <small class="mut">Pantau kuota sesi grooming anabul &amp; masa berlaku kartu Anda.</small>
+        </div>
+        <span class="b ok flex items-center gap-1.5" id="memberActiveBadge">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Status: Member Aktif
+        </span>
+      </div>
+
+      <!-- REALISTIC PHYSICAL VIP MEMBERSHIP CARD (BENTUK KARTU ASLI) -->
+      <div class="physical-card-container">
+        <div class="physical-card" id="physicalVipCard">
+          <!-- Glossy Reflection Sheen -->
+          <div class="card-shine"></div>
+
+          <!-- Card Top Bar: EMV Chip, NFC & Logo -->
+          <div class="card-top">
+            <div style="display:flex;align-items:center">
+              <!-- Golden EMV Chip with Circuit Grid -->
+              <div class="card-emv-chip" title="EMV Smart Chip">
+                <div></div><div></div><div></div><div></div>
+              </div>
+              <!-- Contactless NFC Wave Icon -->
+              <svg class="card-nfc w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round">
+                <path d="M8.5 16.5a5 5 0 0 1 0-7"/>
+                <path d="M12 19a8.5 8.5 0 0 1 0-12"/>
+                <path d="M15.5 21.5a12 12 0 0 1 0-17"/>
               </svg>
             </div>
-          </div>
-        </div>
 
-        <!-- Embossed 16-Digit Card Number -->
-        <div>
-          <small style="font-size:0.68rem;letter-spacing:0.12em;color:#CBD5E1;text-transform:uppercase">Nomor Kartu Member</small>
-          <div class="card-number">8024&nbsp;&nbsp;4219&nbsp;&nbsp;8820&nbsp;&nbsp;1049</div>
-        </div>
-
-        <!-- Card Bottom Bar: Cardholder, Valid Thru & Holographic Accent -->
-        <div class="card-bottom">
-          <div>
-            <small style="font-size:0.62rem;color:#CBD5E1;text-transform:uppercase;letter-spacing:0.08em;display:block">Nama Pemilik</small>
-            <div class="card-holder-name">AULIA RAHMA</div>
-          </div>
-
-          <div style="display:flex;gap:18px;align-items:flex-end">
-            <div class="card-valid-thru">
-              <small>SEJAK</small>
-              <b>11/24</b>
-            </div>
-            <div class="card-valid-thru">
-              <small>BERLAKU S/D</small>
-              <b style="color:#FFDE7D">12/28</b>
+            <!-- Top Right Branding -->
+            <div class="card-brand-badge">
+              <div style="display:flex;flex-direction:column;align-items:flex-end">
+                <span class="tier">VIP GOLD PASS</span>
+                <span class="logo-name">petsaga</span>
+              </div>
+              <img src="img/logo.png" alt="Petsaga" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1.5px solid #FFDE7D">
             </div>
           </div>
+
+          <!-- Embossed 16-Digit Card Number -->
+          <div>
+            <small style="font-size:0.68rem;letter-spacing:0.12em;color:#CBD5E1;text-transform:uppercase">Nomor Kartu Member</small>
+            <div class="card-number" id="cardDisplayNumber">8024&nbsp;&nbsp;4219&nbsp;&nbsp;8820&nbsp;&nbsp;1049</div>
+          </div>
+
+          <!-- Card Bottom Bar: Cardholder, Valid Thru & Holographic Accent -->
+          <div class="card-bottom">
+            <div>
+              <small style="font-size:0.62rem;color:#CBD5E1;text-transform:uppercase;letter-spacing:0.08em;display:block">Nama Pemilik Anabul</small>
+              <div class="card-holder-name" id="cardDisplayHolder">AULIA RAHMA</div>
+            </div>
+
+            <div style="display:flex;gap:18px;align-items:flex-end">
+              <div class="card-valid-thru">
+                <small>MULAI</small>
+                <b>25/11/26</b>
+              </div>
+              <div class="card-valid-thru">
+                <small>BERLAKU S/D</small>
+                <b id="cardValidExpiry" style="color:#FFDE7D">25/11/27</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kartu Informasi Detail Kuota Pemakaian Grooming -->
+      <div class="card" style="margin-top:20px;border-radius:20px;border:1.5px solid var(--bd)">
+        <!-- Sesi & Progress Bar -->
+        <div style="margin-bottom:20px">
+          <div class="row" style="justify-content:space-between;margin-bottom:10px">
+            <span style="font-weight:700;color:var(--brand-teal);font-size:1.05rem">Pemakaian Kuota Sesi Grooming</span>
+            <b id="sessionProgressText" style="font-size:1rem;color:var(--brand-teal)">4 / 10 Sesi Terpakai <small style="color:var(--ok);font-weight:700">(Tersisa 6 Sesi)</small></b>
+          </div>
+          <div class="bar" style="height:14px" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+            <i id="sessionProgressBar" style="width:40%;background:linear-gradient(90deg, var(--brand-gold) 0%, #E67E15 100%)"></i>
+          </div>
+        </div>
+
+        <!-- Detail Grid Pemakaian & Aturan -->
+        <div class="grid" style="margin:20px 0;background:var(--sec);padding:18px;border-radius:16px;border:1px solid var(--bd);grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))">
+          <div>
+            <small class="mut">Sisa Kuota Grooming</small>
+            <div id="displayRemainingSessions" class="met" style="color:var(--brand-teal);font-size:1.8rem">6 <span style="font-size:1rem;font-weight:600;color:var(--tx2)">Sesi Tersedia</span></div>
+            <small style="color:var(--tx2)">Rp70.000 / kucing grooming</small>
+          </div>
+
+          <div>
+            <small class="mut">Masa Berlaku Membership</small>
+            <div id="membershipValidDate" style="font-size:1.05rem;font-weight:700;margin:6px 0 2px;color:var(--brand-teal)">25 Nov 2026 – 25 Nov 2027</div>
+            <small id="membershipValidDays" class="b in" style="font-size:0.75rem">Aktif 1 Tahun Penuh</small>
+          </div>
+
+          <div>
+            <small class="mut">Status Perpanjangan</small>
+            <div style="margin-top:6px">
+              <span id="badgePerpanjangan" class="b cafe">Bisa Diperpanjang</span>
+            </div>
+            <small id="giftNotificationText" style="margin-top:4px;display:block;color:var(--tx2);font-size:0.8rem">
+              Dapatkan <b>Gift Makanan Anabul</b> saat memperpanjang setelah 10 sesi habis!
+            </small>
+          </div>
+        </div>
+
+        <!-- Aturan Transparan Pemakaian -->
+        <div style="background:#F0FDFD;border:1px solid #CCFBF1;border-radius:12px;padding:14px 16px;font-size:0.88rem;color:var(--tx2);line-height:1.6;margin-bottom:20px">
+          <b style="color:var(--brand-teal);display:block;margin-bottom:4px">Ketentuan &amp; Panduan Pemakaian Sesi Grooming:</b>
+          • <b>Harga Spesial Member:</b> Hanya Rp70.000 / kucing (dibandingkan harga normal salon Rp75.000 – Rp90.000).<br>
+          • <b>Perhitungan Sesi:</b> 1 sesi kuota = 1 ekor kucing. Jika Anda membawa 5 kucing sekaligus dalam 1 kali kunjungan, kuota Anda otomatis terpotong 5 sesi langsung (bukan 1 sesi).<br>
+          • <b>Ketentuan Layanan:</b> Khusus Basic Grooming kucing short hair maupun long hair dengan berat badan maksimal 10 kg.<br>
+          • <b>Masa Berlaku:</b> Berlaku 1 tahun (<b>25 Nov 2026 – 25 Nov 2027</b>). Jika 10 sesi tidak digunakan dalam rentang waktu tersebut, kuota otomatis hangus.<br>
+          • <b>Biaya Tambahan di Kasir:</b> Biaya ekstra untuk bobot kucing &gt; 10 kg atau upgrade ke paket grooming premium akan ditotal langsung oleh kasir salon saat kedatangan.
+        </div>
+
+        <!-- Action Button: Perpanjang Membership -->
+        <div class="row" style="gap:12px">
+          <a href="bayar-membership.html" class="btn cta" style="text-decoration:none;padding:12px 28px;font-size:1rem">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Perpanjang Membership (Rp700.000 / Tahun)
+          </a>
+        </div>
+      </div>
+
+      <!-- Keuntungan VIP Member Resmi -->
+      <div class="card" style="margin-top:24px">
+        <h3 style="color:var(--brand-teal);margin-bottom:14px">Benefit Resmi VIP Member Petsaga</h3>
+        <div class="grid" style="margin:0;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:18px">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div class="card-icon" style="background:#F0FDFD;color:var(--brand-teal);border:1px solid #CCFBF1;flex-shrink:0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <b style="color:var(--tx)">10x Sesi Basic Grooming Kucing</b>
+              <p class="mut" style="font-size:0.85rem;margin:4px 0 0">Khusus kucing short hair &amp; long hair max BB 10 kg (hanya Rp70.000 / kucing dibanding harga reguler Rp75.000 – Rp90.000).</p>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div class="card-icon" style="background:#FFF7ED;color:var(--brand-gold);border:1px solid #FED7AA;flex-shrink:0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+            </div>
+            <div>
+              <b style="color:var(--tx)">Gift Makanan Anabul Saat Perpanjangan</b>
+              <p class="mut" style="font-size:0.85rem;margin:4px 0 0">Otomatis mendapatkan gift makanan anabul lezat saat memperpanjang membership setelah kuota 10 sesi penuh.</p>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div class="card-icon" style="background:#FEF3C7;color:#D97706;border:1px solid #FDE68A;flex-shrink:0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            </div>
+            <div>
+              <b style="color:var(--tx)">Goodie Bag Eksklusif Petsaga</b>
+              <p class="mut" style="font-size:0.85rem;margin:4px 0 0">Member VIP berkesempatan mendapatkan goodie bag merchandise premium eksklusif Petsaga.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Kartu Informasi Detail Kuota & Poin (Clean White Background) -->
-    <div class="card" style="margin-top:20px;border-radius:20px;border:1.5px solid var(--bd)">
-      <!-- Sesi & Progress Bar -->
-      <div style="margin-bottom:20px">
-        <div class="row" style="justify-content:space-between;margin-bottom:10px">
-          <span style="font-weight:700;color:var(--brand-teal);font-size:1.02rem">Progres Sesi Cat Cafe &amp; Grooming</span>
-          <b>6 / 10 Sesi <small style="color:var(--tx2)">(Tersisa 4 Sesi)</small></b>
-        </div>
-        <div class="bar" style="height:12px" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-          <i style="width:60%;background:linear-gradient(90deg, var(--brand-gold) 0%, #E67E15 100%)"></i>
-        </div>
-      </div>
-
-      <!-- Detail Grid -->
-      <div class="grid" style="margin:20px 0;background:var(--sec);padding:18px;border-radius:16px;border:1px solid var(--bd)">
-        <div>
-          <small class="mut">Poin Loyalty Tersimpan</small>
-          <div class="met" style="color:var(--brand-gold)">240 <span style="font-size:1.1rem;font-weight:600">pts</span></div>
-          <small style="color:var(--tx2)">+20 pts tiap 1 sesi digunakan</small>
-        </div>
-
-        <div>
-          <small class="mut">Masa Berlaku Membership</small>
-          <div style="font-size:1.2rem;font-weight:700;margin:6px 0 2px;color:var(--brand-teal)">20 Des 2028</div>
-          <small class="b in" style="font-size:0.75rem">Sisa 740 hari lagi</small>
-        </div>
-
-        <div>
-          <small class="mut">Reward Goodie Bag Eksklusif</small>
-          <div style="margin-top:6px">
-            <span class="b wn">Klaim setelah 10 sesi penuh</span>
-          </div>
-          <small style="margin-top:4px;display:block;color:var(--tx2)">Tersisa 4 sesi lagi untuk klaim!</small>
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="row" style="gap:12px;margin-top:20px">
-        <button class="btn cta" data-action="renew">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-          Perpanjang Membership (+1 Tahun)
-        </button>
-        <button class="btn teal" data-action="useSes">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-          Gunakan 1 Sesi Kunjungan (Simulasi)
-        </button>
-      </div>
-    </div>
-
-    <!-- Keuntungan VIP Member -->
-    <div class="card" style="margin-top:24px">
-      <h3 style="color:var(--brand-teal);margin-bottom:14px">Hak Istimewa &amp; Benefit Member VIP</h3>
-      <div class="grid" style="margin:0">
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <div class="card-icon" style="background:#FFF7ED;color:#F99D26;border:1px solid #FED7AA">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div>
-            <b style="color:var(--tx)">Prioritas Reservasi Slot</b>
-            <p class="mut" style="font-size:0.85rem">Akses kuota khusus saat akhir pekan dan jam sibuk tanpa antre panjang.</p>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <div class="card-icon" style="background:#F0FDFD;color:#0B474D;border:1px solid #CCFBF1">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div>
-            <b style="color:var(--tx)">Diskon 15% Grooming Care</b>
-            <p class="mut" style="font-size:0.85rem">Potongan harga otomatis untuk semua paket grooming reguler dan spa kucing.</p>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:12px;align-items:flex-start">
-          <div class="card-icon" style="background:#FEF3C7;color:#D97706;border:1px solid #FDE68A">
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div>
-            <b style="color:var(--tx)">Snack Kucing Gratis</b>
-            <p class="mut" style="font-size:0.85rem">1 pouch snack treat kucing gratis di setiap kunjungan sesi Cat Cafe.</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </main>
 </div>
 
@@ -327,5 +439,105 @@
 
 <script src="data/dummy-data.js"></script>
 <script src="js/core.js"></script>
+<script>
+  // State Management: Apakah user sudah menjadi member atau belum
+  // Default: Jika belum ada session/local, kita tampilkan '1' (Aktif) namun sediakan switch mudah
+  let isMember = localStorage.getItem('petsaga_vip_active') !== '0';
+
+  const viewUnreg = document.getElementById('viewUnregisteredMember');
+  const viewActive = document.getElementById('viewActiveMember');
+  const btnToggle = document.getElementById('btnToggleMemberState');
+  const simText = document.getElementById('simBannerText');
+  const sideBadge = document.getElementById('sidebarUserBadge');
+  const sideName = document.getElementById('sidebarUserName');
+
+  function updateMemberView() {
+    if (isMember) {
+      if (viewUnreg) viewUnreg.style.display = 'none';
+      if (viewActive) viewActive.style.display = 'block';
+      if (btnToggle) btnToggle.textContent = 'Beralih ke Tampilan: Belum Member';
+      if (simText) simText.textContent = 'Mode Member Aktif: Kartu fisik VIP dan kuota 10 sesi grooming Anda siap digunakan.';
+      if (sideBadge) {
+        sideBadge.className = 'b ok';
+        sideBadge.textContent = 'Member Aktif';
+      }
+    } else {
+      if (viewUnreg) viewUnreg.style.display = 'block';
+      if (viewActive) viewActive.style.display = 'none';
+      if (btnToggle) btnToggle.textContent = 'Beralih ke Tampilan: Sudah Member';
+      if (simText) simText.textContent = 'Mode Calon Member: Isi formulir untuk mendaftar kartu VIP & lanjut pembayaran Rp700.000.';
+      if (sideBadge) {
+        sideBadge.className = 'b wn';
+        sideBadge.textContent = 'Belum Member';
+      }
+    }
+  }
+
+  // Toggle button click handler
+  if (btnToggle) {
+    btnToggle.addEventListener('click', () => {
+      isMember = !isMember;
+      localStorage.setItem('petsaga_vip_active', isMember ? '1' : '0');
+      updateMemberView();
+      toast(isMember ? 'Menampilkan halaman Member Aktif' : 'Menampilkan halaman Pendaftaran Member Baru', 'in');
+    });
+  }
+
+  // Handle Form Registrasi Member Baru
+  const fRegister = document.getElementById('fRegisterMember');
+  if (fRegister) {
+    fRegister.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('regName')?.value.trim() || 'Aulia Rahma';
+      const phone = document.getElementById('regPhone')?.value.trim() || '081200000001';
+      const cardNum = document.getElementById('regCardNum')?.value || '8024 4219 8820 1049';
+
+      sessionStorage.setItem('petsaga_new_member_name', name);
+      sessionStorage.setItem('petsaga_new_member_phone', phone);
+      sessionStorage.setItem('petsaga_new_member_card', cardNum);
+
+      // Arahkan ke pembayaran Rp700.000
+      window.location.href = 'bayar-membership.html';
+    });
+  }
+
+  // Cek apakah baru saja membayar perpanjangan atau aktivasi baru di bayar-membership.html
+  if (sessionStorage.getItem('petsaga_membership_renewed') === '1') {
+    isMember = true;
+    localStorage.setItem('petsaga_vip_active', '1');
+
+    // Update Nama jika dari form registrasi
+    const savedName = sessionStorage.getItem('petsaga_new_member_name');
+    if (savedName) {
+      const cardHolder = document.getElementById('cardDisplayHolder');
+      if (cardHolder) cardHolder.textContent = savedName.toUpperCase();
+      if (sideName) sideName.textContent = savedName;
+    }
+
+    const progText = document.getElementById('sessionProgressText');
+    const progBar = document.getElementById('sessionProgressBar');
+    const validDate = document.getElementById('membershipValidDate');
+    const validDays = document.getElementById('membershipValidDays');
+    const cardValidExpiry = document.getElementById('cardValidExpiry');
+    const remSes = document.getElementById('displayRemainingSessions');
+    
+    if (progText) progText.innerHTML = '0 / 10 Sesi Terpakai <small style="color:var(--ok);font-weight:700">(Sisa 10 Sesi Penuh)</small>';
+    if (progBar) progBar.style.width = '0%';
+    if (remSes) remSes.innerHTML = '10 <span style="font-size:1rem;font-weight:600;color:var(--ok)">Sesi Penuh</span>';
+    if (validDate) validDate.textContent = '25 Nov 2026 – 25 Nov 2027';
+    if (validDays) {
+      validDays.className = 'b ok';
+      validDays.textContent = 'Aktif 1 Tahun Penuh';
+    }
+    if (cardValidExpiry) cardValidExpiry.textContent = '25/11/27';
+    
+    setTimeout(() => {
+      toast('Selamat! Membership VIP Anda telah aktif 1 tahun (10 sesi grooming).', 'ok');
+    }, 400);
+  }
+
+  // Inisialisasi tampilan
+  updateMemberView();
+</script>
 </body>
 </html>

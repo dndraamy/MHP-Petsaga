@@ -53,15 +53,7 @@
 <!-- Header / Top Bar -->
 <header>
   <a href="admin-dashboard.html" class="brand">
-    <div class="brand-badge">
-      <svg viewBox="0 0 24 24">
-        <circle cx="7" cy="8.5" r="2.2"/>
-        <circle cx="17" cy="8.5" r="2.2"/>
-        <circle cx="10" cy="5" r="2.2"/>
-        <circle cx="14" cy="5" r="2.2"/>
-        <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
-      </svg>
-    </div>
+    <img src="img/logo.png" alt="Logo Petsaga" class="brand-logo-img">
     <div class="brand-text">
       <span class="title">petsaga</span>
       <small>Panel Administrasi</small>
@@ -81,10 +73,6 @@
       <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
       Keluar
     </a>
-    <button class="btn sm ghost" data-action="reset" title="Kembalikan semua data ke kondisi awal">
-      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-      Reset Demo
-    </button>
   </div>
 </header>
 
@@ -115,10 +103,6 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
       <em>Pengingat</em>
     </a>
-    <a href="admin-kpi.html">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-      <em>Laporan KPI</em>
-    </a>
 
     <div class="user-pill">
       <div class="user-avatar" style="background:linear-gradient(135deg, #D1E7DC 0%, #A3C9B8 100%)">
@@ -138,13 +122,20 @@
         <h1 style="margin:0 0 4px">Kotak Ulasan &amp; Keluhan Pelanggan</h1>
         <small class="mut">Tindak lanjuti masukan pelanggan dalam 2×24 jam untuk menjaga kepuasan.</small>
       </div>
-      <span class="b dg">4 Perlu Respon</span>
+      <span class="b dg" id="badge-unreplied">4 Perlu Respon</span>
+    </div>
+
+    <!-- Review Filter Tab Bar -->
+    <div class="row" style="gap:8px;margin-bottom:20px;flex-wrap:wrap">
+      <button class="filter-btn on" data-filter="all">Semua Ulasan (<span id="cnt-all">5</span>)</button>
+      <button class="filter-btn" data-filter="unreplied">Belum Dibalas (<span id="cnt-unreplied">4</span>)</button>
+      <button class="filter-btn" data-filter="replied">Sudah Dibalas (<span id="cnt-replied">1</span>)</button>
     </div>
 
     <!-- Review Cards Container (Pure HTML) -->
     <div id="out">
       <!-- Review 1: Citra Lestari -->
-      <div class="card interactive rv">
+      <div class="card interactive rv" data-status="unreplied" id="card-f4">
         <div class="row" style="justify-content:space-between;margin-bottom:8px">
           <div>
             <div class="row" style="gap:8px">
@@ -159,17 +150,17 @@
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#E8E1D5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
           </div>
-          <div style="text-align:right">
-            <span class="b in">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="review-time-box">
+            <span class="time-pill" style="color:var(--brand-teal)">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               Sisa 43 jam
-            </span><br>
-            <small class="mut">5 jam lalu</small>
+            </span>
+            <span class="time-ago">5 jam lalu</span>
           </div>
         </div>
         <p style="font-size:1.02rem">“Hasil grooming rapi, harum, dan Kopi tetap tenang selama dicukur.”</p>
-        <div class="row" style="margin-top:14px;justify-content:space-between">
-          <small>Status: <span class="b wn">Belum dibalas</span></small>
+        <div class="row" style="margin-top:14px;justify-content:space-between" id="act-f4">
+          <small>Status: <span class="b wn" id="st-f4">Belum dibalas</span></small>
           <div class="row" style="gap:6px">
             <button class="btn sm in" data-action="reply" data-v="f4">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -184,7 +175,7 @@
       </div>
 
       <!-- Review 2: Farhan Nugroho (Low) -->
-      <div class="card interactive rv low">
+      <div class="card interactive rv low" data-status="unreplied" id="card-f5">
         <div class="row" style="justify-content:space-between;margin-bottom:8px">
           <div>
             <div class="row" style="gap:8px">
@@ -200,17 +191,17 @@
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#E8E1D5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
           </div>
-          <div style="text-align:right">
-            <span class="b in">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="review-time-box">
+            <span class="time-pill" style="color:var(--brand-teal)">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               Sisa 28 jam
-            </span><br>
-            <small class="mut">20 jam lalu</small>
+            </span>
+            <span class="time-ago">20 jam lalu</span>
           </div>
         </div>
-        <p style="font-size:1.02rem">“Suasananya nyaman, tapi slot sore cepat banget penuh dan agak padat.”</p>
-        <div class="row" style="margin-top:14px;justify-content:space-between">
-          <small>Status: <span class="b wn">Belum dibalas</span></small>
+        <p style="font-size:1.02rem">“Suasananya nyaman, tapi pengunjung ramai dan agak padat.”</p>
+        <div class="row" style="margin-top:14px;justify-content:space-between" id="act-f5">
+          <small>Status: <span class="b wn" id="st-f5">Belum dibalas</span></small>
           <div class="row" style="gap:6px">
             <button class="btn sm in" data-action="reply" data-v="f5">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -225,7 +216,7 @@
       </div>
 
       <!-- Review 3: Dimas Santoso (Low) -->
-      <div class="card interactive rv low">
+      <div class="card interactive rv low" data-status="unreplied" id="card-f2">
         <div class="row" style="justify-content:space-between;margin-bottom:8px">
           <div>
             <div class="row" style="gap:8px">
@@ -241,17 +232,17 @@
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#E8E1D5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
           </div>
-          <div style="text-align:right">
-            <span class="b wn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="review-time-box">
+            <span class="time-pill" style="color:#D97706">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               Sisa 18 jam
-            </span><br>
-            <small class="mut">30 jam lalu</small>
+            </span>
+            <span class="time-ago">30 jam lalu</span>
           </div>
         </div>
         <p style="font-size:1.02rem">“Antrean masuk agak lama saat jam 2 siang dan area litter box kurang wangi.”</p>
-        <div class="row" style="margin-top:14px;justify-content:space-between">
-          <small>Status: <span class="b wn">Belum dibalas</span></small>
+        <div class="row" style="margin-top:14px;justify-content:space-between" id="act-f2">
+          <small>Status: <span class="b wn" id="st-f2">Belum dibalas</span></small>
           <div class="row" style="gap:6px">
             <button class="btn sm in" data-action="reply" data-v="f2">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -266,7 +257,7 @@
       </div>
 
       <!-- Review 4: Bima Pratama (Low - Overdue) -->
-      <div class="card interactive rv low">
+      <div class="card interactive rv low" data-status="unreplied" id="card-f1">
         <div class="row" style="justify-content:space-between;margin-bottom:8px">
           <div>
             <div class="row" style="gap:8px">
@@ -282,14 +273,17 @@
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#E8E1D5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
           </div>
-          <div style="text-align:right">
-            <span class="b dg">Terlambat 12 jam</span><br>
-            <small class="mut">60 jam lalu</small>
+          <div class="review-time-box">
+            <span class="time-pill" style="color:var(--dg)">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Terlambat 12 jam
+            </span>
+            <span class="time-ago">60 jam lalu</span>
           </div>
         </div>
         <p style="font-size:1.02rem">“Hewan saya pulang dalam kondisi bulu bagian perut masih agak lembap.”</p>
-        <div class="row" style="margin-top:14px;justify-content:space-between">
-          <small>Status: <span class="b wn">Belum ditangani</span></small>
+        <div class="row" style="margin-top:14px;justify-content:space-between" id="act-f1">
+          <small>Status: <span class="b wn" id="st-f1">Belum ditangani</span></small>
           <div class="row" style="gap:6px">
             <button class="btn sm in" data-action="reply" data-v="f1">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -304,7 +298,7 @@
       </div>
 
       <!-- Review 5: Aulia Rahma (Replied) -->
-      <div class="card interactive rv">
+      <div class="card interactive rv" data-status="replied" id="card-f3">
         <div class="row" style="justify-content:space-between;margin-bottom:8px">
           <div>
             <div class="row" style="gap:8px">
@@ -319,18 +313,21 @@
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
           </div>
-          <div style="text-align:right">
-            <span class="b ok">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <div class="review-time-box">
+            <span class="time-pill" style="color:var(--ok)">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
               Selesai Ditangani
-            </span><br>
-            <small class="mut">4 hari lalu</small>
+            </span>
+            <span class="time-ago">4 hari lalu</span>
           </div>
         </div>
         <p style="font-size:1.02rem">“Kucingnya ramah-ramah, tempatnya bersih wangi, staf sangat membantu!”</p>
-        <div style="background:var(--sec);padding:10px 14px;border-radius:12px;margin-top:10px">
-          <small style="font-weight:700;color:var(--cafe-h);display:block">Balasan Admin Terkirim:</small>
-          <small class="mut">Halo Aulia, terima kasih banyak atas ulasan positifnya! Kami senang kamu dan hewan kesayangan nyaman di Petsaga. Sampai jumpa lagi di kunjungan berikutnya.</small>
+        <div class="admin-reply-box" style="margin-top:12px">
+          <small style="font-weight:700;color:var(--brand-teal);display:flex;align-items:center;gap:6px;margin-bottom:4px">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>
+            Balasan Resmi Tim Petsaga
+          </small>
+          <p style="margin:0;font-size:0.92rem;color:var(--tx)">Halo Aulia, terima kasih banyak atas ulasan positifnya! Kami senang kamu dan anabul nyaman di Petsaga. Sampai jumpa lagi di kunjungan berikutnya.</p>
         </div>
       </div>
     </div>
@@ -351,5 +348,49 @@
 
 <script src="data/dummy-data.js"></script>
 <script src="js/core.js"></script>
+<script>
+  // Filter tab logic for reviews
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const reviewCards = document.querySelectorAll('#out .rv');
+
+  window.refreshReviewCounts = function() {
+    const total = document.querySelectorAll('#out .rv').length;
+    const unreplied = document.querySelectorAll('#out .rv[data-status="unreplied"]').length;
+    const replied = document.querySelectorAll('#out .rv[data-status="replied"]').length;
+    
+    const cntAll = document.getElementById('cnt-all');
+    const cntUn = document.getElementById('cnt-unreplied');
+    const cntRep = document.getElementById('cnt-replied');
+    const badgeUn = document.getElementById('badge-unreplied');
+    
+    if (cntAll) cntAll.textContent = total;
+    if (cntUn) cntUn.textContent = unreplied;
+    if (cntRep) cntRep.textContent = replied;
+    if (badgeUn) {
+      if (unreplied > 0) {
+        badgeUn.className = 'b dg';
+        badgeUn.textContent = unreplied + ' Perlu Respon';
+      } else {
+        badgeUn.className = 'b ok';
+        badgeUn.textContent = 'Semua Selesai Dibalas';
+      }
+    }
+  };
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      const f = btn.getAttribute('data-filter');
+      reviewCards.forEach(card => {
+        if (f === 'all' || card.getAttribute('data-status') === f) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 </body>
 </html>
