@@ -97,7 +97,7 @@ const RES_DETAILS = {
   'RSV-004': { name: 'Eka Widyani', wa: '081200000005', svc: 'Cat Cafe', schedule: 'Besok, 12:00 WIB', qty: '2 orang', price: 'Rp30.000', note: 'Kunjungan pertama kali' },
   'RSV-005': { name: 'Aulia Rahma', wa: '081200000001', svc: 'Pet Grooming (Premium Paw)', schedule: '2 Hari Lagi', qty: '1 Kucing (2 th)', price: 'Rp110.000', note: 'Takut suara pengering' },
   'RSV-006': { name: 'Citra Lestari', wa: '081200000003', svc: 'Pet Grooming (Fresh & Clean)', schedule: '3 Hari Lalu', qty: '1 Anjing (4 th)', price: 'Rp85.000', note: 'Aktif, suka gigit handuk' },
-  'RSV-007': { name: 'Farhan Nugroho', wa: '081200000006', svc: 'Cat Cafe', schedule: 'Besok, 16:00 WIB', qty: '6 orang', price: 'Rp90.000', note: 'Slot sore penuh' },
+  'RSV-007': { name: 'Farhan Nugroho', wa: '081200000006', svc: 'Cat Cafe', schedule: 'Besok, 16:00 WIB', qty: '6 orang', price: 'Rp90.000', note: 'Permintaan rombongan 6 orang' },
   'RSV-008': { name: 'Dimas Santoso', wa: '081200000004', svc: 'Pet Grooming (Royal Treatment)', schedule: '3 Hari Lagi', qty: '2 Kucing (1 th & 5 th)', price: 'Rp300.000', note: 'Salah satu agresif saat disisir' },
   'RSV-009': { name: 'Bima Pratama', wa: '081200000002', svc: 'Pet Grooming (Basic Care)', schedule: '4 Hari Lagi', qty: '1 Anjing (7 th)', price: 'Rp75.000', note: 'Alergi shampo beraroma' }
 };

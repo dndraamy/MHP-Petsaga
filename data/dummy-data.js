@@ -96,7 +96,7 @@ function seed() {
       { id: 'f2', c: 'c4', svc: 'cafe', r: 2, txt: 'Antrean masuk lama dan area kurang bersih.', h: 30, replied: false, done: false },
       { id: 'f3', c: 'c1', svc: 'cafe', r: 5, txt: 'Kucingnya ramah-ramah, staf sangat membantu!', h: 100, replied: true, done: false },
       { id: 'f4', c: 'c3', svc: 'groom', r: 4, txt: 'Hasil grooming rapi, harum, dan Kopi tenang.', h: 5, replied: false, done: false },
-      { id: 'f5', c: 'c6', svc: 'cafe', r: 3, txt: 'Suasananya nyaman, tapi slot sore cepat penuh.', h: 20, replied: false, done: false },
+      { id: 'f5', c: 'c6', svc: 'cafe', r: 4, txt: 'Suasananya sangat nyaman dan kucingnya ramah-ramah.', h: 20, replied: false, done: false },
       { id: 'f6', c: 'c5', svc: 'groom', r: 5, txt: 'Pelayanan cepat dan hasilnya memuaskan.', h: 150, replied: true, done: true }
     ].map(f => ({ ...f, at: Date.now() - f.h * H })),
     ct: {}

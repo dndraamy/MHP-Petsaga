@@ -1193,7 +1193,7 @@ details p {
     margin-top: 10px;
   }
 
-  /* Spacious Customer Bottom Navigation */
+  /* Spacious Customer Bottom Navigation (Mobile <= 820px) */
   .customer-bottom-nav {
     position: fixed;
     bottom: 0;
@@ -1204,7 +1204,7 @@ details p {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-top: 1px solid var(--bd);
-    padding: 6px 4px 10px;
+    padding: 6px 16px 10px;
     display: flex !important;
     justify-content: space-around;
     align-items: center;
@@ -1216,22 +1216,22 @@ details p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    padding: 4px 2px;
+    gap: 3px;
+    padding: 6px 4px;
     flex: 1;
     min-width: 0;
-    max-width: 68px;
+    max-width: 80px;
     color: var(--tx2);
     text-decoration: none;
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 600;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: all 0.2s ease;
   }
 
   .customer-bottom-nav a svg {
-    width: 20px;
-    height: 20px;
+    width: 21px;
+    height: 21px;
     transition: transform 0.2s ease;
   }
 
@@ -1246,6 +1246,32 @@ details p {
     transform: translateY(-1px);
   }
 
+  /* Mobile-only Quick Access for Profil Hewan */
+  .mobile-pet-quick-access {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    background: #F0FDFD;
+    border: 1.5px solid #CCFBF1;
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin: 18px 0 20px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 4px 14px rgba(11, 71, 77, 0.08);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .mobile-pet-quick-access:active {
+    transform: scale(0.98);
+    background: #E6FAF8;
+  }
+
+  .mobile-pet-quick-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 6px;
+  }
+
   /* Hide raw sidebar on mobile customer */
   #nav.customer-nav {
     display: none;
@@ -1256,9 +1282,15 @@ details p {
   }
 }
 
-/* Desktop styles for Customer Bottom Nav */
+/* Desktop styles for Customer Bottom Nav & Mobile Elements */
 @media (min-width: 821px) {
   .customer-bottom-nav {
+    display: none !important;
+  }
+  .mobile-pet-quick-access {
+    display: none !important;
+  }
+  .mobile-pet-quick-btn {
     display: none !important;
   }
 }
