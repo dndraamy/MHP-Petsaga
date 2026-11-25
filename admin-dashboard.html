@@ -128,19 +128,19 @@
     <div class="grid">
       <div class="card interactive">
         <small class="mut">Total Reservasi</small>
-        <div class="met" style="color:var(--tx)">9</div>
+        <div class="met" id="dashTotalRes" style="color:var(--tx)">9</div>
         <small>Cat Cafe &amp; Grooming</small>
       </div>
 
       <div class="card interactive" style="border-top:3px solid var(--wn)">
         <small class="mut">Perlu Konfirmasi</small>
-        <div class="met" style="color:var(--wn)">4</div>
+        <div class="met" id="dashPendingRes" style="color:var(--wn)">4</div>
         <small style="color:var(--wn);font-weight:600">Segera tinjau &amp; setujui</small>
       </div>
 
       <div class="card interactive" style="border-top:3px solid var(--ok)">
         <small class="mut">Terkonfirmasi</small>
-        <div class="met" style="color:var(--ok)">3</div>
+        <div class="met" id="dashConfirmedRes" style="color:var(--ok)">3</div>
         <small>Siap dilayani</small>
       </div>
 
@@ -155,20 +155,20 @@
     <div class="card" style="margin-top:24px">
       <div class="row" style="justify-content:space-between;margin-bottom:12px;border-bottom:1px solid var(--bd);padding-bottom:10px">
         <h3 style="margin:0">Antrean Reservasi Menunggu Persetujuan</h3>
-        <span class="b wn">4 Permintaan Masuk</span>
+        <span class="b wn" id="dashPendingBadge">4 Permintaan Masuk</span>
       </div>
 
       <!-- Item 1: RSV-003 -->
-      <div class="row" style="justify-content:space-between;border-bottom:1px solid var(--bd);padding:12px 0">
+      <div class="row" id="dashRow-RSV-003" style="justify-content:space-between;border-bottom:1px solid var(--bd);padding:12px 0">
         <div>
           <div class="row" style="gap:8px">
             <b>RSV-003</b>
             <span class="b cafe">Cat Cafe</span>
             <span style="font-weight:600">Bima Pratama</span>
           </div>
-          <small class="mut">Hari ini, 14:00 WIB · 4 Pengunjung</small>
+          <small class="mut">Hari ini, 14:00 WIB · 4 Pengunjung · <b>Rp60.000</b></small>
         </div>
-        <div class="row">
+        <div class="row" id="dashActions-RSV-003">
           <button class="btn sm ok" data-action="conf" data-v="RSV-003">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             Konfirmasi
@@ -181,16 +181,16 @@
       </div>
 
       <!-- Item 2: RSV-004 -->
-      <div class="row" style="justify-content:space-between;border-bottom:1px solid var(--bd);padding:12px 0">
+      <div class="row" id="dashRow-RSV-004" style="justify-content:space-between;border-bottom:1px solid var(--bd);padding:12px 0">
         <div>
           <div class="row" style="gap:8px">
             <b>RSV-004</b>
             <span class="b cafe">Cat Cafe</span>
             <span style="font-weight:600">Eka Widyani</span>
           </div>
-          <small class="mut">Besok, 12:00 WIB · 2 Pengunjung</small>
+          <small class="mut">Besok, 12:00 WIB · 2 Pengunjung · <b>Rp30.000</b></small>
         </div>
-        <div class="row">
+        <div class="row" id="dashActions-RSV-004">
           <button class="btn sm ok" data-action="conf" data-v="RSV-004">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             Konfirmasi
@@ -203,16 +203,16 @@
       </div>
 
       <!-- Item 3: RSV-005 -->
-      <div class="row" style="justify-content:space-between;border-bottom:1px solid var(--bd);padding:12px 0">
+      <div class="row" id="dashRow-RSV-005" style="justify-content:space-between;border-bottom:1px solid var(--bd);padding:12px 0">
         <div>
           <div class="row" style="gap:8px">
             <b>RSV-005</b>
             <span class="b groom">Grooming</span>
             <span style="font-weight:600">Aulia Rahma</span>
           </div>
-          <small class="mut">2 Hari Lagi · 1 Kucing (Premium Paw) · <i>"Takut pengering"</i></small>
+          <small class="mut">2 Hari Lagi · 1 Kucing (Premium Paw) · <b>Rp110.000</b> · <i>"Takut pengering"</i></small>
         </div>
-        <div class="row">
+        <div class="row" id="dashActions-RSV-005">
           <button class="btn sm ok" data-action="conf" data-v="RSV-005">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             Konfirmasi
@@ -225,16 +225,16 @@
       </div>
 
       <!-- Item 4: RSV-009 -->
-      <div class="row" style="justify-content:space-between;padding:12px 0">
+      <div class="row" id="dashRow-RSV-009" style="justify-content:space-between;padding:12px 0">
         <div>
           <div class="row" style="gap:8px">
             <b>RSV-009</b>
             <span class="b groom">Grooming</span>
             <span style="font-weight:600">Bima Pratama</span>
           </div>
-          <small class="mut">4 Hari Lagi · 1 Anjing (Basic Care) · <i>"Alergi shampo beraroma"</i></small>
+          <small class="mut">4 Hari Lagi · 1 Anjing (Basic Care) · <b>Rp75.000</b> · <i>"Alergi shampo beraroma"</i></small>
         </div>
-        <div class="row">
+        <div class="row" id="dashActions-RSV-009">
           <button class="btn sm ok" data-action="conf" data-v="RSV-009">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             Konfirmasi
@@ -521,6 +521,64 @@
     }
   }
 
+  function syncDashboardCounters() {
+    const statuses = window.getResStatuses ? window.getResStatuses() : {};
+    let total = 0;
+    let pending = 0;
+    let confirmed = 0;
+    let rejected = 0;
+
+    for (const id in statuses) {
+      total++;
+      if (statuses[id] === 'Menunggu') pending++;
+      else if (statuses[id] === 'Terkonfirmasi') confirmed++;
+      else if (statuses[id] === 'Ditolak') rejected++;
+    }
+
+    const metTotal = document.getElementById('dashTotalRes');
+    const metPending = document.getElementById('dashPendingRes');
+    const metConfirmed = document.getElementById('dashConfirmedRes');
+    const badgePending = document.getElementById('dashPendingBadge');
+
+    if (metTotal) metTotal.textContent = total;
+    if (metPending) metPending.textContent = pending;
+    if (metConfirmed) metConfirmed.textContent = confirmed;
+    if (badgePending) {
+      if (pending > 0) {
+        badgePending.className = 'b wn';
+        badgePending.textContent = `${pending} Permintaan Masuk`;
+      } else {
+        badgePending.className = 'b ok';
+        badgePending.textContent = `Semua Antrean Selesai`;
+      }
+    }
+
+    // Update queue rows
+    ['RSV-003', 'RSV-004', 'RSV-005', 'RSV-009'].forEach(id => {
+      const actionWrap = document.getElementById('dashActions-' + id);
+      if (!actionWrap) return;
+      const st = statuses[id];
+      if (st === 'Terkonfirmasi') {
+        actionWrap.innerHTML = `<span class="b ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;display:inline-block"><polyline points="20 6 9 17 4 12"/></svg> Terkonfirmasi</span>`;
+      } else if (st === 'Ditolak') {
+        actionWrap.innerHTML = `<span class="b dg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Ditolak</span>`;
+      } else {
+        actionWrap.innerHTML = `
+          <button class="btn sm ok" data-action="conf" data-v="${id}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Konfirmasi
+          </button>
+          <button class="btn sm dg" data-action="rej" data-v="${id}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Tolak
+          </button>
+        `;
+      }
+    });
+  }
+
+  window.syncDashboardCounters = syncDashboardCounters;
+
   document.addEventListener('DOMContentLoaded', () => {
     const selectYear = document.getElementById('selectKpiYear');
     if (selectYear) {
@@ -529,6 +587,7 @@
       });
     }
     updateKpiCharts('2026');
+    syncDashboardCounters();
   });
 </script>
 </body>

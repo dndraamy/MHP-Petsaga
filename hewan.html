@@ -131,7 +131,7 @@
             </div>
             <div>
               <h3 style="margin:0;color:var(--brand-teal)">Mochi</h3>
-              <small class="mut">Kucing Domestik · 2 Tahun</small>
+              <small class="mut">Kucing Domestik · 2 Tahun · 4.2 kg (Short Hair)</small>
             </div>
           </div>
           <span class="b ok">
@@ -152,7 +152,7 @@
             </div>
             <div>
               <h3 style="margin:0;color:var(--brand-teal)">Susu</h3>
-              <small class="mut">Kucing Persia · 8 Bulan</small>
+              <small class="mut">Kucing Persia · 8 Bulan · 3.5 kg (Long Hair)</small>
             </div>
           </div>
           <span class="b wn">
@@ -190,6 +190,21 @@
         <div class="fld" id="fldOtherPet" style="display:none">
           <label for="pOther">Sebutkan Jenis Hewan</label>
           <input id="pOther" name="otherType" type="text" placeholder="Contoh: Kelinci, Hamster, Sugar Glider, dll.">
+        </div>
+
+        <div class="fld">
+          <label for="pw">Berat Badan (kg)</label>
+          <input id="pw" name="w" type="number" step="0.1" min="0.5" max="30" placeholder="contoh: 4.2" value="4.0" required>
+        </div>
+
+        <div class="fld">
+          <label for="pf">Jenis Bulu</label>
+          <select id="pf" name="fur">
+            <option value="Short Hair">Short Hair (Bulu Pendek)</option>
+            <option value="Long Hair">Long Hair (Bulu Panjang)</option>
+            <option value="Medium Hair">Medium Hair</option>
+            <option value="Hairless">Hairless (Tanpa Bulu)</option>
+          </select>
         </div>
 
         <div class="fld">

@@ -443,6 +443,8 @@ document.addEventListener('submit', e => {
       const otherVal = form.elements.otherType?.value.trim();
       if (otherVal) petType = otherVal;
     }
+    const weight = form.elements.w?.value ? `${form.elements.w.value} kg` : '4 kg';
+    const fur = form.elements.fur?.value || 'Short Hair';
     toast(`Profil ${name} (${petType}) berhasil ditambahkan!`, 'ok');
 
     // Dynamically append new card to #list if on hewan.html
@@ -459,7 +461,7 @@ document.addEventListener('submit', e => {
             </div>
             <div>
               <h3 style="margin:0;color:var(--brand-teal)">${esc(name)}</h3>
-              <small class="mut">${esc(petType)} · ${esc(form.elements.a?.value || '1 tahun')}</small>
+              <small class="mut">${esc(petType)} · ${esc(form.elements.a?.value || '1 tahun')} · ${esc(weight)} (${esc(fur)})</small>
             </div>
           </div>
           <span class="b ok">
