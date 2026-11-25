@@ -1389,3 +1389,24 @@ details p {
   margin-top: 8px;
   text-align: center;
 }
+
+/* ==========================================================================
+   Admin Reservations Table Dropdown Action
+   ========================================================================== */
+.action-dropdown {
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1.5px solid var(--bd);
+  background: #FFFFFF;
+  color: var(--tx);
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  min-width: 112px;
+}
+.action-dropdown:hover, .action-dropdown:focus {
+  border-color: var(--brand-teal);
+  box-shadow: 0 0 0 2px rgba(11, 71, 77, 0.12);
+}

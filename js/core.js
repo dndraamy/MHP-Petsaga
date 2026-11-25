@@ -77,13 +77,61 @@ function X() {
   }, 200);
 }
 
+// Data detail reservasi untuk modal & tampilan
+const DEFAULT_RES_STATUS = {
+  'RSV-001': 'Terkonfirmasi',
+  'RSV-002': 'Terkonfirmasi',
+  'RSV-003': 'Menunggu',
+  'RSV-004': 'Menunggu',
+  'RSV-005': 'Menunggu',
+  'RSV-006': 'Terkonfirmasi',
+  'RSV-007': 'Ditolak',
+  'RSV-008': 'Ditolak',
+  'RSV-009': 'Menunggu'
+};
+
+const RES_DETAILS = {
+  'RSV-001': { name: 'Aulia Rahma', wa: '081200000001', svc: 'Cat Cafe', schedule: 'Hari ini, 10:00 WIB', qty: '2 orang', price: 'Rp30.000', note: 'Pengunjung santai' },
+  'RSV-002': { name: 'Citra Lestari', wa: '081200000003', svc: 'Cat Cafe', schedule: 'Hari ini, 10:00 WIB', qty: '3 orang', price: 'Rp45.000', note: 'Bermain dengan kucing ras' },
+  'RSV-003': { name: 'Bima Pratama', wa: '081200000002', svc: 'Cat Cafe', schedule: 'Hari ini, 14:00 WIB', qty: '4 orang', price: 'Rp60.000', note: 'Reservasi meja tengah' },
+  'RSV-004': { name: 'Eka Widyani', wa: '081200000005', svc: 'Cat Cafe', schedule: 'Besok, 12:00 WIB', qty: '2 orang', price: 'Rp30.000', note: 'Kunjungan pertama kali' },
+  'RSV-005': { name: 'Aulia Rahma', wa: '081200000001', svc: 'Pet Grooming (Premium Paw)', schedule: '2 Hari Lagi', qty: '1 Kucing (2 th)', price: 'Rp110.000', note: 'Takut suara pengering' },
+  'RSV-006': { name: 'Citra Lestari', wa: '081200000003', svc: 'Pet Grooming (Fresh & Clean)', schedule: '3 Hari Lalu', qty: '1 Anjing (4 th)', price: 'Rp85.000', note: 'Aktif, suka gigit handuk' },
+  'RSV-007': { name: 'Farhan Nugroho', wa: '081200000006', svc: 'Cat Cafe', schedule: 'Besok, 16:00 WIB', qty: '6 orang', price: 'Rp90.000', note: 'Slot sore penuh' },
+  'RSV-008': { name: 'Dimas Santoso', wa: '081200000004', svc: 'Pet Grooming (Royal Treatment)', schedule: '3 Hari Lagi', qty: '2 Kucing (1 th & 5 th)', price: 'Rp300.000', note: 'Salah satu agresif saat disisir' },
+  'RSV-009': { name: 'Bima Pratama', wa: '081200000002', svc: 'Pet Grooming (Basic Care)', schedule: '4 Hari Lagi', qty: '1 Anjing (7 th)', price: 'Rp75.000', note: 'Alergi shampo beraroma' }
+};
+
+function getResStatuses() {
+  try {
+    const s = localStorage.getItem('petsaga_res_status');
+    if (s) return JSON.parse(s);
+  } catch (e) {}
+  return { ...DEFAULT_RES_STATUS };
+}
+
+function setResStatus(id, newStatus) {
+  const statuses = getResStatuses();
+  statuses[id] = newStatus;
+  localStorage.setItem('petsaga_res_status', JSON.stringify(statuses));
+  return statuses;
+}
+
+window.DEFAULT_RES_STATUS = DEFAULT_RES_STATUS;
+window.RES_DETAILS = RES_DETAILS;
+window.getResStatuses = getResStatuses;
+window.setResStatus = setResStatus;
+
 /**
  * 3. INTERAKSI & AKSI TOMBOL
  */
 const Actions = {
   // Tombol reset demo data
   reset: () => {
-    toast('Data demo dikembalikan ke kondisi awal (simulasi)');
+    localStorage.removeItem('petsaga_res_status');
+    toast('Data reservasi telah dikembalikan ke kondisi awal', 'in');
+    if (typeof window.syncDashboardCounters === 'function') window.syncDashboardCounters();
+    if (typeof window.syncReservationsTable === 'function') window.syncReservationsTable();
   },
 
   // Tombol dalam modal
@@ -107,23 +155,31 @@ const Actions = {
   },
 
   // Konfirmasi reservasi (Admin hanya bisa pilih salah satu: konfirmasi atau tolak)
-  conf: btn => {
-    const id = btn.dataset.v;
-    const tr = btn.closest('tr');
-    if (tr) {
-      const stBadge = tr.querySelector('.b.wn, .b.ok, .b.dg');
-      if (stBadge) {
-        stBadge.className = 'b ok';
-        stBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;display:inline-block"><polyline points="20 6 9 17 4 12"/></svg> Terkonfirmasi`;
+  conf: btnOrId => {
+    const id = typeof btnOrId === 'string' ? btnOrId : (btnOrId.dataset?.v || btnOrId.value || btnOrId);
+    setResStatus(id, 'Terkonfirmasi');
+
+    // Sinkronisasi live di halaman dashboard jika aktif
+    if (typeof window.syncDashboardCounters === 'function') {
+      window.syncDashboardCounters();
+    }
+    // Sinkronisasi live di halaman tabel reservasi jika aktif
+    if (typeof window.syncReservationsTable === 'function') {
+      window.syncReservationsTable();
+    }
+
+    if (typeof btnOrId !== 'string' && btnOrId?.closest) {
+      const tr = btnOrId.closest('tr');
+      if (tr) {
+        tr.setAttribute('data-st', 'Terkonfirmasi');
+        const stBadge = tr.querySelector('.status-cell') || tr.querySelector('.b.wn, .b.ok, .b.dg');
+        if (stBadge) {
+          stBadge.className = 'b ok';
+          stBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;display:inline-block"><polyline points="20 6 9 17 4 12"/></svg> Terkonfirmasi`;
+        }
       }
-      tr.setAttribute('data-st', 'Terkonfirmasi');
-      const actionCell = tr.querySelector('td:last-child');
-      if (actionCell) {
-        actionCell.innerHTML = `<button class="btn sm in" data-action="det" data-v="${id}">Detail</button>`;
-      }
-    } else {
-      const containerRow = btn.parentElement;
-      if (containerRow) {
+      const containerRow = btnOrId.parentElement;
+      if (containerRow && !tr) {
         containerRow.innerHTML = `<span class="b ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;display:inline-block"><polyline points="20 6 9 17 4 12"/></svg> Terkonfirmasi</span>`;
       }
     }
@@ -131,26 +187,32 @@ const Actions = {
   },
 
   // Tolak reservasi (Admin hanya bisa pilih salah satu: konfirmasi atau tolak)
-  rej: btn => {
-    const id = btn.dataset.v;
-    M('Tolak Reservasi?', `<p>Apakah Anda yakin ingin menolak reservasi <b>${esc(id)}</b>?</p>`, [
+  rej: btnOrId => {
+    const id = typeof btnOrId === 'string' ? btnOrId : (btnOrId.dataset?.v || btnOrId.value || btnOrId);
+    M('Tolak Reservasi?', `<p style="margin:8px 0;line-height:1.5;color:var(--tx2)">Apakah Anda yakin ingin menolak reservasi <b>${esc(id)}</b>?</p>`, [
       ['Batal', 'ghost'],
       ['Tolak Reservasi', 'dg', () => {
-        const tr = btn.closest('tr');
-        if (tr) {
-          const stBadge = tr.querySelector('.b.wn, .b.ok, .b.dg');
-          if (stBadge) {
-            stBadge.className = 'b dg';
-            stBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Ditolak`;
+        setResStatus(id, 'Ditolak');
+
+        if (typeof window.syncDashboardCounters === 'function') {
+          window.syncDashboardCounters();
+        }
+        if (typeof window.syncReservationsTable === 'function') {
+          window.syncReservationsTable();
+        }
+
+        if (typeof btnOrId !== 'string' && btnOrId?.closest) {
+          const tr = btnOrId.closest('tr');
+          if (tr) {
+            tr.setAttribute('data-st', 'Ditolak');
+            const stBadge = tr.querySelector('.status-cell') || tr.querySelector('.b.wn, .b.ok, .b.dg');
+            if (stBadge) {
+              stBadge.className = 'b dg';
+              stBadge.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Ditolak`;
+            }
           }
-          tr.setAttribute('data-st', 'Ditolak');
-          const actionCell = tr.querySelector('td:last-child');
-          if (actionCell) {
-            actionCell.innerHTML = `<span class="b dg">Ditolak</span>`;
-          }
-        } else {
-          const containerRow = btn.parentElement;
-          if (containerRow) {
+          const containerRow = btnOrId.parentElement;
+          if (containerRow && !tr) {
             containerRow.innerHTML = `<span class="b dg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;display:inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Ditolak</span>`;
           }
         }
@@ -160,17 +222,54 @@ const Actions = {
   },
 
   // Detail reservasi
-  det: btn => {
-    const id = btn.dataset.v;
-    M(`Detail Reservasi ${id}`, `
-      <dl>
-        <dt>ID Reservasi</dt><dd><b>${esc(id)}</b></dd>
-        <dt>Pelanggan</dt><dd>Aulia Rahma</dd>
-        <dt>WhatsApp</dt><dd>081200000001</dd>
-        <dt>Layanan</dt><dd>Simulasi Layanan Petsaga</dd>
-        <dt>Status</dt><dd><span class="b ok">Aktif</span></dd>
-      </dl>
-    `);
+  det: btnOrId => {
+    const id = typeof btnOrId === 'string' ? btnOrId : (btnOrId.dataset?.v || btnOrId.value || btnOrId);
+    const item = RES_DETAILS[id] || { name: 'Pelanggan', wa: '081200000000', svc: 'Layanan Petsaga', schedule: 'Hari ini', qty: '1', price: 'Rp75.000', note: '—' };
+    const currentStatus = (window.getResStatuses ? window.getResStatuses()[id] : null) || 'Terkonfirmasi';
+    const stBadgeClass = currentStatus === 'Terkonfirmasi' ? 'ok' : (currentStatus === 'Ditolak' ? 'dg' : 'wn');
+
+    M(`Detail Reservasi — ${esc(id)}`, `
+      <div style="font-size:0.92rem;line-height:1.7;margin:8px 0">
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd)">
+          <span style="color:var(--tx2);font-weight:600">ID Reservasi:</span>
+          <b>${esc(id)}</b>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd)">
+          <span style="color:var(--tx2);font-weight:600">Nama Pelanggan:</span>
+          <b>${esc(item.name)}</b>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd)">
+          <span style="color:var(--tx2);font-weight:600">Nomor WhatsApp:</span>
+          <b>${esc(item.wa)}</b>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd)">
+          <span style="color:var(--tx2);font-weight:600">Layanan:</span>
+          <span class="b cafe">${esc(item.svc)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd)">
+          <span style="color:var(--tx2);font-weight:600">Kapasitas / Qty:</span>
+          <span>${esc(item.qty)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd)">
+          <span style="color:var(--tx2);font-weight:600">Jadwal:</span>
+          <span>${esc(item.schedule)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd)">
+          <span style="color:var(--tx2);font-weight:600">Total Biaya Pemesanan:</span>
+          <b style="color:var(--brand-teal);font-size:1.05rem">${esc(item.price)}</b>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--bd)">
+          <span style="color:var(--tx2);font-weight:600">Catatan Khusus:</span>
+          <span class="mut">${esc(item.note)}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:6px 0;margin-top:4px">
+          <span style="color:var(--tx2);font-weight:600">Status Saat Ini:</span>
+          <span class="b ${stBadgeClass}">${esc(currentStatus)}</span>
+        </div>
+      </div>
+    `, [
+      ['Tutup', 'ghost']
+    ]);
   },
 
   // Kontrol kuota slot Cat Cafe (+ / -)
@@ -196,22 +295,23 @@ const Actions = {
     window.location.href = 'bayar-membership.html';
   },
 
-  // Simulasi pesan WhatsApp
+  // Kirim notifikasi WhatsApp resmi
   wa: btn => {
-    const [id, type] = btn.dataset.v.split('|');
-    M('Simulasi Kirim WhatsApp', `
-      <p>Pesan otomatis siap dikirim ke nomor kontak pelanggan (simulasi).</p>
-      <div class="b in" style="white-space:normal;padding:12px;margin:8px 0">
-        "Halo, kami dari Petsaga merindukan kunjungan Anda! Dapatkan penawaran spesial minggu ini 🐾"
+    const val = btn.dataset.v || '';
+    const [id, type] = val.split('|');
+    M('Kirim Notifikasi WhatsApp', `
+      <p style="margin:0 0 10px;color:var(--tx2);font-size:0.92rem">Pesan otomatis telah disiapkan untuk dikirimkan langsung ke nomor WhatsApp pelanggan:</p>
+      <div class="b in" style="white-space:normal;padding:14px;margin:8px 0;line-height:1.6;font-size:0.92rem;text-align:left">
+        "Halo Kak, kami dari Petsaga merindukan kunjungan Anda dan anabul kesayangan! Dapatkan penawaran perawatan spesial minggu ini bersama tim groomer kami."
       </div>
-      <p class="mut">Tidak ada pulsa atau pesan WhatsApp nyata yang dikirim.</p>
+      <p class="mut" style="font-size:0.8rem;margin-top:10px">Template pesan sesuai standar komunikasi resmi Petsaga.</p>
     `, [
-      ['Tutup', 'ghost'],
-      ['Tandai Terkirim', 'in', () => {
-        btn.textContent = '✓ Dihubungi';
+      ['Batal', 'ghost'],
+      ['Kirim WhatsApp Sekarang', 'ok', () => {
+        btn.textContent = '✓ Terkirim';
         btn.className = 'b ok';
         btn.disabled = true;
-        toast('Status berhasil ditandai sudah dihubungi', 'ok');
+        toast('Notifikasi WhatsApp berhasil dikirim ke pelanggan', 'ok');
       }]
     ]);
   },

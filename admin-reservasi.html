@@ -154,217 +154,259 @@
             <th>Tanggal</th>
             <th>Waktu</th>
             <th>Kapasitas</th>
+            <th>Total Biaya</th>
             <th>Usia Hewan</th>
             <th>Catatan Khusus</th>
             <th>Status</th>
-            <th style="text-align:right">Aksi</th>
+            <th style="text-align:center">Aksi</th>
           </tr>
         </thead>
         <tbody>
           <!-- Row 1 -->
-          <tr data-st="Terkonfirmasi" data-svc="cafe">
+          <tr data-id="RSV-001" data-st="Terkonfirmasi" data-svc="cafe">
             <td><b>RSV-001</b></td>
             <td><b>Aulia Rahma</b></td>
             <td><span class="b cafe">Cat Cafe</span></td>
             <td>Hari ini</td>
             <td>10:00</td>
             <td>2 orang</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp30.000</span></td>
             <td>—</td>
             <td><small class="mut">Pengunjung santai</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b ok">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><polyline points="20 6 9 17 4 12"/></svg>
                 Terkonfirmasi
               </span>
             </td>
-            <td style="text-align:right">
-              <button class="btn sm in" data-action="det" data-v="RSV-001">Detail</button>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-001" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="det">ℹ Lihat Detail</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+              </select>
             </td>
           </tr>
 
           <!-- Row 2 -->
-          <tr data-st="Terkonfirmasi" data-svc="cafe">
+          <tr data-id="RSV-002" data-st="Terkonfirmasi" data-svc="cafe">
             <td><b>RSV-002</b></td>
             <td><b>Citra Lestari</b></td>
             <td><span class="b cafe">Cat Cafe</span></td>
             <td>Hari ini</td>
             <td>10:00</td>
             <td>3 orang</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp45.000</span></td>
             <td>—</td>
             <td><small class="mut">—</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b ok">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><polyline points="20 6 9 17 4 12"/></svg>
                 Terkonfirmasi
               </span>
             </td>
-            <td style="text-align:right">
-              <button class="btn sm in" data-action="det" data-v="RSV-002">Detail</button>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-002" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="det">ℹ Lihat Detail</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+              </select>
             </td>
           </tr>
 
           <!-- Row 3 -->
-          <tr data-st="Menunggu" data-svc="cafe">
+          <tr data-id="RSV-003" data-st="Menunggu" data-svc="cafe">
             <td><b>RSV-003</b></td>
             <td><b>Bima Pratama</b></td>
             <td><span class="b cafe">Cat Cafe</span></td>
             <td>Hari ini</td>
             <td>14:00</td>
             <td>4 orang</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp60.000</span></td>
             <td>—</td>
             <td><small class="mut">—</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b wn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 Menunggu
               </span>
             </td>
-            <td style="text-align:right">
-              <div class="row" style="justify-content:flex-end;gap:4px">
-                <button class="btn sm ok" data-action="conf" data-v="RSV-003">Setujui</button>
-                <button class="btn sm dg" data-action="rej" data-v="RSV-003">Tolak</button>
-                <button class="btn sm in" data-action="det" data-v="RSV-003">Detail</button>
-              </div>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-003" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+                <option value="det">ℹ Lihat Detail</option>
+              </select>
             </td>
           </tr>
 
           <!-- Row 4 -->
-          <tr data-st="Menunggu" data-svc="cafe">
+          <tr data-id="RSV-004" data-st="Menunggu" data-svc="cafe">
             <td><b>RSV-004</b></td>
             <td><b>Eka Widyani</b></td>
             <td><span class="b cafe">Cat Cafe</span></td>
             <td>Besok</td>
             <td>12:00</td>
             <td>2 orang</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp30.000</span></td>
             <td>—</td>
             <td><small class="mut">—</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b wn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 Menunggu
               </span>
             </td>
-            <td style="text-align:right">
-              <div class="row" style="justify-content:flex-end;gap:4px">
-                <button class="btn sm ok" data-action="conf" data-v="RSV-004">Setujui</button>
-                <button class="btn sm dg" data-action="rej" data-v="RSV-004">Tolak</button>
-                <button class="btn sm in" data-action="det" data-v="RSV-004">Detail</button>
-              </div>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-004" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+                <option value="det">ℹ Lihat Detail</option>
+              </select>
             </td>
           </tr>
 
           <!-- Row 5 -->
-          <tr data-st="Menunggu" data-svc="groom">
+          <tr data-id="RSV-005" data-st="Menunggu" data-svc="groom">
             <td><b>RSV-005</b></td>
             <td><b>Aulia Rahma</b></td>
             <td><span class="b groom">Grooming</span></td>
             <td>2 hari lagi</td>
             <td>—</td>
             <td>1 hewan</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp110.000</span></td>
             <td>2 th</td>
             <td><small style="color:var(--dg)">Takut pengering</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b wn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 Menunggu
               </span>
             </td>
-            <td style="text-align:right">
-              <div class="row" style="justify-content:flex-end;gap:4px">
-                <button class="btn sm ok" data-action="conf" data-v="RSV-005">Setujui</button>
-                <button class="btn sm dg" data-action="rej" data-v="RSV-005">Tolak</button>
-                <button class="btn sm in" data-action="det" data-v="RSV-005">Detail</button>
-              </div>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-005" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+                <option value="det">ℹ Lihat Detail</option>
+              </select>
             </td>
           </tr>
 
           <!-- Row 6 -->
-          <tr data-st="Terkonfirmasi" data-svc="groom">
+          <tr data-id="RSV-006" data-st="Terkonfirmasi" data-svc="groom">
             <td><b>RSV-006</b></td>
             <td><b>Citra Lestari</b></td>
             <td><span class="b groom">Grooming</span></td>
             <td>3 hari lalu</td>
             <td>—</td>
             <td>1 hewan</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp85.000</span></td>
             <td>4 th</td>
             <td><small class="mut">Suka gigit handuk</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b ok">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><polyline points="20 6 9 17 4 12"/></svg>
                 Terkonfirmasi
               </span>
             </td>
-            <td style="text-align:right">
-              <button class="btn sm in" data-action="det" data-v="RSV-006">Detail</button>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-006" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="det">ℹ Lihat Detail</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+              </select>
             </td>
           </tr>
 
           <!-- Row 7 -->
-          <tr data-st="Ditolak" data-svc="cafe">
+          <tr data-id="RSV-007" data-st="Ditolak" data-svc="cafe">
             <td><b>RSV-007</b></td>
             <td><b>Farhan Nugroho</b></td>
             <td><span class="b cafe">Cat Cafe</span></td>
             <td>Besok</td>
             <td>16:00</td>
             <td>6 orang</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp90.000</span></td>
             <td>—</td>
             <td><small class="mut">Slot penuh</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b dg">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 Ditolak
               </span>
             </td>
-            <td style="text-align:right">
-              <button class="btn sm in" data-action="det" data-v="RSV-007">Detail</button>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-007" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="det">ℹ Lihat Detail</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+              </select>
             </td>
           </tr>
 
           <!-- Row 8 -->
-          <tr data-st="Ditolak" data-svc="groom">
+          <tr data-id="RSV-008" data-st="Ditolak" data-svc="groom">
             <td><b>RSV-008</b></td>
             <td><b>Dimas Santoso</b></td>
             <td><span class="b groom">Grooming</span></td>
             <td>3 hari lagi</td>
             <td>—</td>
             <td>2 hewan</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp300.000</span></td>
             <td>1 th &amp; 5 th</td>
             <td><small style="color:var(--dg)">Agresif saat disisir</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b dg">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 Ditolak
               </span>
             </td>
-            <td style="text-align:right">
-              <button class="btn sm in" data-action="det" data-v="RSV-008">Detail</button>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-008" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="det">ℹ Lihat Detail</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+              </select>
             </td>
           </tr>
 
           <!-- Row 9 -->
-          <tr data-st="Menunggu" data-svc="groom">
+          <tr data-id="RSV-009" data-st="Menunggu" data-svc="groom">
             <td><b>RSV-009</b></td>
             <td><b>Bima Pratama</b></td>
             <td><span class="b groom">Grooming</span></td>
             <td>4 hari lagi</td>
             <td>—</td>
             <td>1 hewan</td>
+            <td><span style="font-weight:700;color:var(--brand-teal)">Rp75.000</span></td>
             <td>7 th</td>
             <td><small style="color:var(--wn)">Alergi shampo wangi</small></td>
-            <td>
+            <td class="status-cell">
               <span class="b wn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 Menunggu
               </span>
             </td>
-            <td style="text-align:right">
-              <div class="row" style="justify-content:flex-end;gap:4px">
-                <button class="btn sm ok" data-action="conf" data-v="RSV-009">Setujui</button>
-                <button class="btn sm dg" data-action="rej" data-v="RSV-009">Tolak</button>
-                <button class="btn sm in" data-action="det" data-v="RSV-009">Detail</button>
-              </div>
+            <td style="text-align:center">
+              <select class="action-dropdown" data-id="RSV-009" onchange="handleResDropdown(this)">
+                <option value="" disabled selected>Pilih Aksi ▾</option>
+                <option value="conf">✓ Setujui</option>
+                <option value="rej">✕ Tolak</option>
+                <option value="det">ℹ Lihat Detail</option>
+              </select>
             </td>
           </tr>
+        </tbody>
+      </table>
+    </div>
         </tbody>
       </table>
     </div>
@@ -386,6 +428,21 @@
 <script src="data/dummy-data.js"></script>
 <script src="js/core.js"></script>
 <script>
+  function handleResDropdown(sel) {
+    const act = sel.value;
+    const id = sel.getAttribute('data-id');
+    if (!act || !id) return;
+
+    if (act === 'conf') {
+      Actions.conf(id);
+    } else if (act === 'rej') {
+      Actions.rej(id);
+    } else if (act === 'det') {
+      Actions.det(id);
+    }
+    sel.value = '';
+  }
+
   function filterTable() {
     const q = (document.getElementById('qRes')?.value || '').toLowerCase();
     const st = document.getElementById('fsRes')?.value || '';
@@ -404,9 +461,34 @@
     });
   }
 
+  function syncReservationsTable() {
+    const statuses = window.getResStatuses ? window.getResStatuses() : {};
+    for (const id in statuses) {
+      const tr = document.querySelector(`tr[data-id="${id}"]`);
+      if (!tr) continue;
+      const st = statuses[id];
+      tr.setAttribute('data-st', st);
+      const cell = tr.querySelector('.status-cell');
+      if (cell) {
+        if (st === 'Terkonfirmasi') {
+          cell.innerHTML = `<span class="b ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><polyline points="20 6 9 17 4 12"/></svg> Terkonfirmasi</span>`;
+        } else if (st === 'Ditolak') {
+          cell.innerHTML = `<span class="b dg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Ditolak</span>`;
+        } else {
+          cell.innerHTML = `<span class="b wn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-3.5 h-3.5 inline-block"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Menunggu</span>`;
+        }
+      }
+    }
+    filterTable();
+  }
+
+  window.syncReservationsTable = syncReservationsTable;
   document.getElementById('qRes')?.addEventListener('input', filterTable);
   document.getElementById('fsRes')?.addEventListener('change', filterTable);
   document.getElementById('fvRes')?.addEventListener('change', filterTable);
+
+  document.addEventListener('DOMContentLoaded', syncReservationsTable);
+  syncReservationsTable();
 </script>
 </body>
 </html>
