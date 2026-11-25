@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beranda — Petsaga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+        },
+        colors: {
+          brand: {
+            gold: '#F99D26',
+            teal: '#0B474D'
+          },
+          cafe: { DEFAULT: '#F99D26', hover: '#E07D10', tint: '#FFF7ED' },
+          groom: { DEFAULT: '#0B474D', hover: '#073439', tint: '#F0FDFD' },
+          cta: { DEFAULT: '#F99D26', hover: '#E07D10' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="cust">
+
+<!-- Header / Top Bar -->
+<header>
+  <a href="index.html" class="brand">
+    <div class="brand-badge">
+      <svg viewBox="0 0 24 24">
+        <circle cx="7" cy="8.5" r="2.2"/>
+        <circle cx="17" cy="8.5" r="2.2"/>
+        <circle cx="10" cy="5" r="2.2"/>
+        <circle cx="14" cy="5" r="2.2"/>
+        <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="title">petsaga</span>
+      <small>Cat Cafe &amp; Pet Grooming</small>
+    </div>
+  </a>
+
+  <!-- Desktop Quick Nav Links -->
+  <div class="nav-customer-links">
+    <a href="index.html" class="on">Beranda</a>
+    <a href="cafe.html">Cat Cafe</a>
+    <a href="grooming.html">Grooming</a>
+    <a href="member.html">Membership</a>
+    <a href="info.html">Info &amp; FAQ</a>
+  </div>
+
+  <!-- Dedicated Admin Portal Button -->
+  <div class="row" style="gap:10px">
+    <a href="admin-login.html" class="btn-portal-admin" title="Buka Panel Administrasi (Khusus Desktop)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Portal Admin</span>
+    </a>
+    <button class="btn sm ghost" data-action="reset" title="Kembalikan semua data ke kondisi awal">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      Reset Demo
+    </button>
+  </div>
+</header>
+
+<!-- Prototype Simulation Banner -->
+<div class="sim">
+  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+  <span>Mode Pengunjung: Anda dapat memesan slot Cat Cafe, reservasi grooming, dan melihat kartu VIP.</span>
+</div>
+
+<!-- Main App Layout -->
+<div class="app">
+  <!-- Desktop Sidebar Navigation -->
+  <nav id="nav" class="customer-nav" aria-label="Menu utama">
+    <a href="index.html" class="on" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <em>Beranda</em>
+    </a>
+    <a href="cafe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+      <em>Cat Cafe</em>
+    </a>
+    <a href="grooming.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-2 2L7 8"/><path d="M3 14h18a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1Z"/><path d="M5 14V6a3 3 0 0 1 6 0v2"/><path d="M4 21v1"/><path d="M20 21v1"/></svg>
+      <em>Pet Grooming</em>
+    </a>
+    <a href="member.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+      <em>VIP Membership</em>
+    </a>
+    <a href="hewan.html">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="8.5" r="2.2"/><circle cx="17" cy="8.5" r="2.2"/><circle cx="10" cy="5" r="2.2"/><circle cx="14" cy="5" r="2.2"/><path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/></svg>
+      <em>Profil Hewan</em>
+    </a>
+    <a href="feedback.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <em>Ulasan &amp; Saran</em>
+    </a>
+    <a href="info.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <em>Info &amp; Aturan</em>
+    </a>
+
+    <!-- User Profile Pill in Sidebar (Desktop) -->
+    <div class="user-pill">
+      <div class="user-avatar" style="background:var(--brand-teal)">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div style="min-width:0;flex:1">
+        <div style="font-weight:700;font-size:0.92rem;color:var(--tx)">Aulia Rahma</div>
+        <small class="b ok" style="padding:1px 8px;font-size:0.72rem">Member Aktif</small>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Main Content -->
+  <main id="main" tabindex="-1">
+    <!-- Creative Hero Section with Mascot Character -->
+    <section class="hero-creative">
+      <div class="hero-text" style="max-width:580px">
+        <span class="b cafe" style="margin-bottom:12px;display:inline-flex">
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="8.5" r="2.2"/><circle cx="17" cy="8.5" r="2.2"/><circle cx="10" cy="5" r="2.2"/><circle cx="14" cy="5" r="2.2"/><path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/></svg>
+          Cat Cafe &amp; Premium Grooming
+        </span>
+        <h1 style="color:var(--brand-teal);margin-bottom:12px">Halo, <span id="nm" style="color:var(--brand-gold)">Aulia</span>!<br>Yuk main &amp; rawat anabulmu</h1>
+        <p style="color:var(--tx2);font-size:1.02rem;line-height:1.6;margin-bottom:22px">
+          Tempat ternyaman untuk santai bareng kucing-kucing ramah dan perawatan salon profesional untuk hewan kesayanganmu.
+        </p>
+        <div class="row" style="gap:12px">
+          <a class="btn cta" href="cafe.html">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+            Reservasi Cat Cafe
+          </a>
+          <a class="btn teal" href="grooming.html">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-2 2L7 8"/><path d="M3 14h18a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1Z"/><path d="M5 14V6a3 3 0 0 1 6 0v2"/></svg>
+            Booking Grooming
+          </a>
+        </div>
+      </div>
+
+      <!-- Cute Mochi Cat Mascot Vector -->
+      <div class="hero-mascot-box">
+        <span class="mascot-speech">Meow! Selamat datang~</span>
+        <svg width="140" height="130" viewBox="0 0 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Left Ear -->
+          <path d="M28 60L16 20C22 18 38 25 46 36L28 60Z" fill="#F99D26" stroke="#0B474D" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M22 25C26 23 35 28 40 36L28 50L22 25Z" fill="#FFD8A8"/>
+          <!-- Right Ear -->
+          <path d="M112 60L124 20C118 18 102 25 94 36L112 60Z" fill="#F99D26" stroke="#0B474D" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M118 25C114 23 105 28 100 36L112 50L118 25Z" fill="#FFD8A8"/>
+          <!-- Cat Body Behind -->
+          <ellipse cx="70" cy="115" rx="46" ry="24" fill="#F0FDFD" stroke="#0B474D" stroke-width="2.5"/>
+          <!-- Cat Head -->
+          <ellipse cx="70" cy="72" rx="48" ry="42" fill="#FFFFFF" stroke="#0B474D" stroke-width="2.5"/>
+          <!-- Warm Amber Calico Patch -->
+          <path d="M85 32C95 36 112 45 116 62C118 70 115 76 110 80C105 70 95 62 88 50C85 45 84 38 85 32Z" fill="#F99D26"/>
+          <path d="M26 64C24 55 28 42 38 34C42 45 38 58 30 65C28 65 27 65 26 64Z" fill="#E07D10"/>
+          <!-- Eyes -->
+          <ellipse cx="50" cy="68" rx="6" ry="8" fill="#0B474D"/>
+          <ellipse cx="52" cy="65" rx="2" ry="3" fill="#FFFFFF"/>
+          <ellipse cx="90" cy="68" rx="6" ry="8" fill="#0B474D"/>
+          <ellipse cx="92" cy="65" rx="2" ry="3" fill="#FFFFFF"/>
+          <!-- Rosy Cheeks -->
+          <ellipse cx="40" cy="78" rx="7" ry="4" fill="#FFD8A8" opacity="0.9"/>
+          <ellipse cx="100" cy="78" rx="7" ry="4" fill="#FFD8A8" opacity="0.9"/>
+          <!-- Nose & Smile :3 -->
+          <path d="M68 76L72 76L70 79L68 76Z" fill="#F99D26"/>
+          <path d="M65 80C67 83 70 83 70 80C70 83 73 83 75 80" stroke="#0B474D" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Whiskers -->
+          <path d="M25 73L42 75M23 80L41 79" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+          <path d="M115 73L98 75M117 80L99 79" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/>
+          <!-- Collar & Bell -->
+          <path d="M42 104C55 112 85 112 98 104" stroke="#F99D26" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="70" cy="110" r="7" fill="#FDE047" stroke="#0B474D" stroke-width="2"/>
+          <circle cx="70" cy="111" r="1.5" fill="#0B474D"/>
+          <!-- Waving Paw -->
+          <ellipse cx="108" cy="98" rx="9" ry="8" fill="#FFFFFF" stroke="#0B474D" stroke-width="2.5"/>
+          <path d="M105 95L105 98M108 94L108 98M111 95L111 98" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Info Highlights Grid with Custom Vector Icons -->
+    <div class="grid">
+      <!-- Card Cat Cafe -->
+      <a href="cafe.html" class="card interactive" style="text-decoration:none">
+        <div class="card-icon" style="background:#FFF7ED;color:#F99D26;border:1px solid #FED7AA">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+        </div>
+        <h3 style="margin-top:14px;color:var(--brand-teal)">Cat Cafe Nyaman</h3>
+        <p style="color:var(--tx)">Tiket masuk <b>Rp15.000</b> / orang untuk durasi santai 1,5 jam.</p>
+        <p class="mut">Bermain, foto, dan beri snack kucing-kucing ramah.</p>
+      </a>
+
+      <!-- Card Grooming -->
+      <a href="grooming.html" class="card interactive" style="text-decoration:none">
+        <div class="card-icon" style="background:#F0FDFD;color:#0B474D;border:1px solid #CCFBF1">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-2 2L7 8"/><path d="M3 14h18a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1Z"/><path d="M5 14V6a3 3 0 0 1 6 0v2"/></svg>
+        </div>
+        <h3 style="margin-top:14px;color:var(--brand-teal)">Pet Grooming Salon</h3>
+        <p style="color:var(--tx)">Tersedia <b>4 paket</b> lengkap: Basic Care sampai Royal Treatment.</p>
+        <p class="mut">Groomer telaten, ruang bersih, dan shampo ramah kulit.</p>
+      </a>
+
+      <!-- Card Jam Buka & Aturan -->
+      <a href="member.html" class="card interactive" style="text-decoration:none">
+        <div class="card-icon" style="background:#FEF3C7;color:#D97706;border:1px solid #FDE68A">
+          <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        </div>
+        <h3 style="margin-top:14px;color:var(--brand-teal)">VIP Membership Card</h3>
+        <p style="color:var(--tx)">Kartu anggota digital dengan kuota sesi &amp; reward eksklusif.</p>
+        <p class="mut">Kumpulkan poin loyalitas di setiap kunjungan.</p>
+      </a>
+    </div>
+
+    <!-- Reservasi Saya Section (Pure HTML Cards) -->
+    <div class="row" style="justify-content:space-between;margin-top:36px;margin-bottom:16px">
+      <h2 style="color:var(--brand-teal);margin:0">Reservasi Saya</h2>
+      <a href="cafe.html" class="btn sm cta">+ Buat Reservasi Baru</a>
+    </div>
+
+    <div class="grid" id="mine">
+      <!-- Card RSV-001 -->
+      <div class="card interactive">
+        <div class="row" style="justify-content:space-between;margin-bottom:10px">
+          <div>
+            <b>RSV-001</b>
+            <span class="b cafe" style="margin-left:6px">Cat Cafe</span>
+          </div>
+          <span class="b ok">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Terkonfirmasi
+          </span>
+        </div>
+        <p style="font-weight:700;font-size:1.02rem;color:var(--brand-teal)">Hari ini, 10:00 WIB</p>
+        <small class="mut">2 Pengunjung · Sesi Santai 1,5 Jam</small>
+      </div>
+
+      <!-- Card RSV-005 -->
+      <div class="card interactive">
+        <div class="row" style="justify-content:space-between;margin-bottom:10px">
+          <div>
+            <b>RSV-005</b>
+            <span class="b groom" style="margin-left:6px">Grooming</span>
+          </div>
+          <span class="b wn">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Menunggu Konfirmasi
+          </span>
+        </div>
+        <p style="font-weight:700;font-size:1.02rem;color:var(--brand-teal)">2 Hari Lagi</p>
+        <small class="mut">1 Kucing (Mochi) · Paket Premium Paw</small>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- SPACIOUS CUSTOMER BOTTOM BAR (Mobile <= 820px, 5 Clean Tabs) -->
+<nav class="customer-bottom-nav" aria-label="Navigasi Bawah">
+  <a href="index.html" class="on" aria-current="page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Beranda</span>
+  </a>
+  <a href="cafe.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+    <span>Cafe</span>
+  </a>
+  <a href="grooming.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-2 2L7 8"/><path d="M3 14h18a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1Z"/><path d="M5 14V6a3 3 0 0 1 6 0v2"/></svg>
+    <span>Grooming</span>
+  </a>
+  <a href="member.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    <span>Member</span>
+  </a>
+  <a href="info.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <span>Info</span>
+  </a>
+</nav>
+
+<!-- Floating Toast Notification -->
+<div id="toast" aria-live="polite"></div>
+
+<!-- Modal Dialog -->
+<div id="modal" class="overlay" hidden>
+  <div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <h2 id="mt"></h2>
+    <div id="mb"></div>
+    <div class="row" id="mf" style="margin-top:20px;justify-content:flex-end"></div>
+  </div>
+</div>
+
+<script src="data/dummy-data.js"></script>
+<script src="js/core.js"></script>
+</body>
+</html>

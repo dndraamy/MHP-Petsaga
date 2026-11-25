@@ -1,0 +1,17 @@
+{
+  "name": "petsaga",
+  "version": "1.0.0",
+  "description": "Petsaga CRM Portal & Cat Cafe / Pet Grooming Responsive Website",
+  "private": true,
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "petsaga",
+    "tailwind",
+    "crm",
+    "html"
+  ],
+  "author": "",
+  "license": "ISC"
+}

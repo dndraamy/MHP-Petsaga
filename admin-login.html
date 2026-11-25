@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login Panel Admin — Petsaga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+        },
+        colors: {
+          brand: {
+            gold: '#F99D26',
+            teal: '#0B474D'
+          }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin" style="background:#FFFFFF;min-height:100vh;display:flex;flex-direction:column">
+
+<!-- MOBILE BLOCKER: Muncul otomatis jika dibuka di HP / Tablet (< 1024px) -->
+<div class="admin-mobile-blocker">
+  <div style="max-width:380px;margin:0 auto">
+    <div style="width:72px;height:72px;border-radius:20px;background:var(--brand-teal-t);color:var(--brand-teal);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;border:1.5px solid var(--brand-teal-border)">
+      <svg class="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="14" x="2" y="3" rx="2"/>
+        <line x1="8" x2="16" y1="21" y2="21"/>
+        <line x1="12" x2="12" y1="17" y2="21"/>
+      </svg>
+    </div>
+    <span class="b wn" style="margin-bottom:12px">Khusus Akses Desktop</span>
+    <h2 style="font-size:1.35rem;margin:8px 0 10px;color:var(--brand-teal)">Portal Admin Hanya Untuk Layar Desktop</h2>
+    <p style="color:var(--tx2);font-size:0.92rem;line-height:1.6;margin-bottom:24px">
+      Demi kenyamanan dan efisiensi manajemen data operasional CRM, tabel reservasi, dan kuota, Panel Admin Petsaga hanya dapat diakses melalui laptop atau komputer (layar min. 1024px).
+    </p>
+    <a href="index.html" class="btn cta lg" style="width:100%;text-align:center">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+      Kembali ke Portal Pelanggan
+    </a>
+  </div>
+</div>
+
+<!-- Header Login Khusus Desktop -->
+<header class="login-header" style="border-bottom:1px solid var(--bd);background:#FFFFFF">
+  <a href="index.html" class="brand">
+    <div class="brand-badge">
+      <svg viewBox="0 0 24 24">
+        <circle cx="7" cy="8.5" r="2.2"/>
+        <circle cx="17" cy="8.5" r="2.2"/>
+        <circle cx="10" cy="5" r="2.2"/>
+        <circle cx="14" cy="5" r="2.2"/>
+        <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="title">petsaga</span>
+      <small>Panel Administrasi</small>
+    </div>
+  </a>
+  <a href="index.html" class="btn ghost sm">
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+    Portal Pelanggan
+  </a>
+</header>
+
+<!-- Login Main Area -->
+<div style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px">
+  <div class="card" style="max-width:440px;width:100%;border-radius:24px;box-shadow:var(--shadow-lg);border:1.5px solid var(--bd);padding:36px 32px">
+    
+    <div style="text-align:center;margin-bottom:28px">
+      <div class="brand-badge" style="width:56px;height:56px;margin:0 auto 16px">
+        <svg viewBox="0 0 24 24" style="width:30px;height:30px">
+          <circle cx="7" cy="8.5" r="2.2"/>
+          <circle cx="17" cy="8.5" r="2.2"/>
+          <circle cx="10" cy="5" r="2.2"/>
+          <circle cx="14" cy="5" r="2.2"/>
+          <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
+        </svg>
+      </div>
+      <span class="b groom" style="margin-bottom:8px">Autentikasi Internal Staff</span>
+      <h1 style="font-size:1.5rem;margin:8px 0 4px;color:var(--brand-teal)">Masuk Panel Admin</h1>
+      <small class="mut">Kelola operasional Cat Cafe, jadwal grooming &amp; data pelanggan.</small>
+    </div>
+
+    <form id="fLogin" onsubmit="event.preventDefault(); window.location.href='admin-dashboard.html';">
+      <div class="fld">
+        <label for="adminEmail">Email Staff Admin</label>
+        <div style="position:relative">
+          <input type="email" id="adminEmail" required value="admin@petsaga.com" style="padding-left:42px">
+          <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--tx3)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+      </div>
+
+      <div class="fld">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <label for="adminPass" style="margin:0">Kata Sandi</label>
+          <span class="mut" style="font-size:0.8rem">Demo: petsaga2026</span>
+        </div>
+        <div style="position:relative">
+          <input type="password" id="adminPass" required value="petsaga2026" style="padding-left:42px">
+          <svg style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--tx3)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:24px">
+        <button type="submit" class="btn teal lg" style="width:100%">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+          Masuk ke Panel Admin
+        </button>
+        <button type="button" onclick="window.location.href='admin-dashboard.html'" class="btn cta sm" style="width:100%">
+          Masuk Cepat (Akses Langsung Demo)
+        </button>
+      </div>
+    </form>
+
+    <div style="margin-top:24px;padding-top:18px;border-top:1px solid var(--bd);text-align:center">
+      <small class="mut">
+        Bukan staff Petsaga? <a href="index.html" style="color:var(--brand-teal);font-weight:700">Kembali ke Portal Pelanggan</a>
+      </small>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

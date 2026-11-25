@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VIP Membership Card — Petsaga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          mono: ['"Space Mono"', 'monospace']
+        },
+        colors: {
+          brand: {
+            gold: '#F99D26',
+            teal: '#0B474D'
+          },
+          cafe: { DEFAULT: '#F99D26', hover: '#E07D10', tint: '#FFF7ED' },
+          groom: { DEFAULT: '#0B474D', hover: '#073439', tint: '#F0FDFD' },
+          cta: { DEFAULT: '#F99D26', hover: '#E07D10' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="cust">
+
+<!-- Header / Top Bar -->
+<header>
+  <a href="index.html" class="brand">
+    <div class="brand-badge">
+      <svg viewBox="0 0 24 24">
+        <circle cx="7" cy="8.5" r="2.2"/>
+        <circle cx="17" cy="8.5" r="2.2"/>
+        <circle cx="10" cy="5" r="2.2"/>
+        <circle cx="14" cy="5" r="2.2"/>
+        <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="title">petsaga</span>
+      <small>Cat Cafe &amp; Pet Grooming</small>
+    </div>
+  </a>
+
+  <!-- Desktop Quick Nav Links -->
+  <div class="nav-customer-links">
+    <a href="index.html">Beranda</a>
+    <a href="cafe.html">Cat Cafe</a>
+    <a href="grooming.html">Grooming</a>
+    <a href="member.html" class="on">Membership</a>
+    <a href="info.html">Info &amp; FAQ</a>
+  </div>
+
+  <!-- Dedicated Admin Portal Button -->
+  <div class="row" style="gap:10px">
+    <a href="admin-login.html" class="btn-portal-admin" title="Buka Panel Administrasi (Khusus Desktop)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Portal Admin</span>
+    </a>
+    <button class="btn sm ghost" data-action="reset" title="Kembalikan semua data ke kondisi awal">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      Reset Demo
+    </button>
+  </div>
+</header>
+
+<!-- Prototype Simulation Banner -->
+<div class="sim">
+  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+  <span>Kartu VIP Digital interaktif: gunakan sesi atau perpanjang masa berlaku dalam simulasi.</span>
+</div>
+
+<!-- Main App Layout -->
+<div class="app">
+  <!-- Desktop Sidebar Navigation -->
+  <nav id="nav" class="customer-nav" aria-label="Menu utama">
+    <a href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <em>Beranda</em>
+    </a>
+    <a href="cafe.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+      <em>Cat Cafe</em>
+    </a>
+    <a href="grooming.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-2 2L7 8"/><path d="M3 14h18a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1Z"/><path d="M5 14V6a3 3 0 0 1 6 0v2"/></svg>
+      <em>Pet Grooming</em>
+    </a>
+    <a href="member.html" class="on" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+      <em>VIP Membership</em>
+    </a>
+    <a href="hewan.html">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="8.5" r="2.2"/><circle cx="17" cy="8.5" r="2.2"/><circle cx="10" cy="5" r="2.2"/><circle cx="14" cy="5" r="2.2"/><path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/></svg>
+      <em>Profil Hewan</em>
+    </a>
+    <a href="feedback.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <em>Ulasan &amp; Saran</em>
+    </a>
+    <a href="info.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <em>Info &amp; Aturan</em>
+    </a>
+
+    <div class="user-pill">
+      <div class="user-avatar" style="background:var(--brand-teal)">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div style="min-width:0;flex:1">
+        <div style="font-weight:700;font-size:0.92rem;color:var(--tx)">Aulia Rahma</div>
+        <small class="b ok" style="padding:1px 8px;font-size:0.72rem">Member Aktif</small>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Main Content -->
+  <main id="main" tabindex="-1">
+    <div class="row" style="justify-content:space-between;margin-bottom:20px">
+      <div>
+        <h1 style="margin:0 0 4px;color:var(--brand-teal)">VIP Membership Card</h1>
+        <small class="mut">Kartu loyalitas fisik digital dengan kuota sesi kunjungan &amp; reward.</small>
+      </div>
+      <span class="b ok flex items-center gap-1.5">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Status: Aktif
+      </span>
+    </div>
+
+    <!-- ======================================================================
+         REALISTIC PHYSICAL VIP MEMBERSHIP CARD (BENTUK KARTU ASLI)
+         ====================================================================== -->
+    <div class="physical-card-container">
+      <div class="physical-card" id="physicalVipCard">
+        <!-- Glossy Reflection Sheen -->
+        <div class="card-shine"></div>
+
+        <!-- Card Top Bar: EMV Chip, NFC & Logo -->
+        <div class="card-top">
+          <div style="display:flex;align-items:center">
+            <!-- Golden EMV Chip with Circuit Grid -->
+            <div class="card-emv-chip" title="EMV Smart Chip">
+              <div></div><div></div><div></div><div></div>
+            </div>
+            <!-- Contactless NFC Wave Icon -->
+            <svg class="card-nfc w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round">
+              <path d="M8.5 16.5a5 5 0 0 1 0-7"/>
+              <path d="M12 19a8.5 8.5 0 0 1 0-12"/>
+              <path d="M15.5 21.5a12 12 0 0 1 0-17"/>
+            </svg>
+          </div>
+
+          <!-- Top Right Branding -->
+          <div class="card-brand-badge">
+            <div style="display:flex;flex-direction:column;align-items:flex-end">
+              <span class="tier">VIP GOLD PASS</span>
+              <span class="logo-name">petsaga</span>
+            </div>
+            <div class="brand-badge" style="width:34px;height:34px;box-shadow:none">
+              <svg viewBox="0 0 24 24" style="width:18px;height:18px">
+                <circle cx="7" cy="8.5" r="2.2"/><circle cx="17" cy="8.5" r="2.2"/>
+                <circle cx="10" cy="5" r="2.2"/><circle cx="14" cy="5" r="2.2"/>
+                <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Embossed 16-Digit Card Number -->
+        <div>
+          <small style="font-size:0.68rem;letter-spacing:0.12em;color:#CBD5E1;text-transform:uppercase">Nomor Kartu Member</small>
+          <div class="card-number">8024&nbsp;&nbsp;4219&nbsp;&nbsp;8820&nbsp;&nbsp;1049</div>
+        </div>
+
+        <!-- Card Bottom Bar: Cardholder, Valid Thru & Holographic Accent -->
+        <div class="card-bottom">
+          <div>
+            <small style="font-size:0.62rem;color:#CBD5E1;text-transform:uppercase;letter-spacing:0.08em;display:block">Nama Pemilik</small>
+            <div class="card-holder-name">AULIA RAHMA</div>
+          </div>
+
+          <div style="display:flex;gap:18px;align-items:flex-end">
+            <div class="card-valid-thru">
+              <small>SEJAK</small>
+              <b>11/24</b>
+            </div>
+            <div class="card-valid-thru">
+              <small>BERLAKU S/D</small>
+              <b style="color:#FFDE7D">12/28</b>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kartu Informasi Detail Kuota & Poin (Clean White Background) -->
+    <div class="card" style="margin-top:20px;border-radius:20px;border:1.5px solid var(--bd)">
+      <!-- Sesi & Progress Bar -->
+      <div style="margin-bottom:20px">
+        <div class="row" style="justify-content:space-between;margin-bottom:10px">
+          <span style="font-weight:700;color:var(--brand-teal);font-size:1.02rem">Progres Sesi Cat Cafe &amp; Grooming</span>
+          <b>6 / 10 Sesi <small style="color:var(--tx2)">(Tersisa 4 Sesi)</small></b>
+        </div>
+        <div class="bar" style="height:12px" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+          <i style="width:60%;background:linear-gradient(90deg, var(--brand-gold) 0%, #E67E15 100%)"></i>
+        </div>
+      </div>
+
+      <!-- Detail Grid -->
+      <div class="grid" style="margin:20px 0;background:var(--sec);padding:18px;border-radius:16px;border:1px solid var(--bd)">
+        <div>
+          <small class="mut">Poin Loyalty Tersimpan</small>
+          <div class="met" style="color:var(--brand-gold)">240 <span style="font-size:1.1rem;font-weight:600">pts</span></div>
+          <small style="color:var(--tx2)">+20 pts tiap 1 sesi digunakan</small>
+        </div>
+
+        <div>
+          <small class="mut">Masa Berlaku Membership</small>
+          <div style="font-size:1.2rem;font-weight:700;margin:6px 0 2px;color:var(--brand-teal)">20 Des 2028</div>
+          <small class="b in" style="font-size:0.75rem">Sisa 740 hari lagi</small>
+        </div>
+
+        <div>
+          <small class="mut">Reward Goodie Bag Eksklusif</small>
+          <div style="margin-top:6px">
+            <span class="b wn">Klaim setelah 10 sesi penuh</span>
+          </div>
+          <small style="margin-top:4px;display:block;color:var(--tx2)">Tersisa 4 sesi lagi untuk klaim!</small>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="row" style="gap:12px;margin-top:20px">
+        <button class="btn cta" data-action="renew">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Perpanjang Membership (+1 Tahun)
+        </button>
+        <button class="btn teal" data-action="useSes">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+          Gunakan 1 Sesi Kunjungan (Simulasi)
+        </button>
+      </div>
+    </div>
+
+    <!-- Keuntungan VIP Member -->
+    <div class="card" style="margin-top:24px">
+      <h3 style="color:var(--brand-teal);margin-bottom:14px">Hak Istimewa &amp; Benefit Member VIP</h3>
+      <div class="grid" style="margin:0">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div class="card-icon" style="background:#FFF7ED;color:#F99D26;border:1px solid #FED7AA">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <b style="color:var(--tx)">Prioritas Reservasi Slot</b>
+            <p class="mut" style="font-size:0.85rem">Akses kuota khusus saat akhir pekan dan jam sibuk tanpa antre panjang.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div class="card-icon" style="background:#F0FDFD;color:#0B474D;border:1px solid #CCFBF1">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <b style="color:var(--tx)">Diskon 15% Grooming Care</b>
+            <p class="mut" style="font-size:0.85rem">Potongan harga otomatis untuk semua paket grooming reguler dan spa kucing.</p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div class="card-icon" style="background:#FEF3C7;color:#D97706;border:1px solid #FDE68A">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <b style="color:var(--tx)">Snack Kucing Gratis</b>
+            <p class="mut" style="font-size:0.85rem">1 pouch snack treat kucing gratis di setiap kunjungan sesi Cat Cafe.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- SPACIOUS CUSTOMER BOTTOM BAR (Mobile <= 820px, 5 Clean Tabs) -->
+<nav class="customer-bottom-nav" aria-label="Navigasi Bawah">
+  <a href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Beranda</span>
+  </a>
+  <a href="cafe.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+    <span>Cafe</span>
+  </a>
+  <a href="grooming.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-2 2L7 8"/><path d="M3 14h18a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1Z"/><path d="M5 14V6a3 3 0 0 1 6 0v2"/></svg>
+    <span>Grooming</span>
+  </a>
+  <a href="member.html" class="on" aria-current="page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    <span>Member</span>
+  </a>
+  <a href="info.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <span>Info</span>
+  </a>
+</nav>
+
+<!-- Floating Toast Notification -->
+<div id="toast" aria-live="polite"></div>
+
+<!-- Modal Dialog -->
+<div id="modal" class="overlay" hidden>
+  <div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <h2 id="mt"></h2>
+    <div id="mb"></div>
+    <div class="row" id="mf" style="margin-top:20px;justify-content:flex-end"></div>
+  </div>
+</div>
+
+<script src="data/dummy-data.js"></script>
+<script src="js/core.js"></script>
+</body>
+</html>

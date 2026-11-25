@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reservasi Cat Cafe — Petsaga</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+        },
+        colors: {
+          brand: {
+            gold: '#F99D26',
+            teal: '#0B474D'
+          },
+          cafe: { DEFAULT: '#F99D26', hover: '#E07D10', tint: '#FFF7ED' },
+          groom: { DEFAULT: '#0B474D', hover: '#073439', tint: '#F0FDFD' },
+          cta: { DEFAULT: '#F99D26', hover: '#E07D10' }
+        }
+      }
+    }
+  }
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="cust">
+
+<!-- Header / Top Bar -->
+<header>
+  <a href="index.html" class="brand">
+    <div class="brand-badge">
+      <svg viewBox="0 0 24 24">
+        <circle cx="7" cy="8.5" r="2.2"/>
+        <circle cx="17" cy="8.5" r="2.2"/>
+        <circle cx="10" cy="5" r="2.2"/>
+        <circle cx="14" cy="5" r="2.2"/>
+        <path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <span class="title">petsaga</span>
+      <small>Cat Cafe &amp; Pet Grooming</small>
+    </div>
+  </a>
+
+  <!-- Desktop Quick Nav Links -->
+  <div class="nav-customer-links">
+    <a href="index.html">Beranda</a>
+    <a href="cafe.html" class="on">Cat Cafe</a>
+    <a href="grooming.html">Grooming</a>
+    <a href="member.html">Membership</a>
+    <a href="info.html">Info &amp; FAQ</a>
+  </div>
+
+  <!-- Dedicated Admin Portal Button -->
+  <div class="row" style="gap:10px">
+    <a href="admin-login.html" class="btn-portal-admin" title="Buka Panel Administrasi (Khusus Desktop)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>Portal Admin</span>
+    </a>
+    <button class="btn sm ghost" data-action="reset" title="Kembalikan semua data ke kondisi awal">
+      <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+      Reset Demo
+    </button>
+  </div>
+</header>
+
+<!-- Prototype Simulation Banner -->
+<div class="sim">
+  <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+  <span>Pemesanan sesi Cat Cafe: pilih tanggal, jumlah pengunjung, dan jam sesi santai.</span>
+</div>
+
+<!-- Main App Layout -->
+<div class="app">
+  <!-- Desktop Sidebar Navigation -->
+  <nav id="nav" class="customer-nav" aria-label="Menu utama">
+    <a href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <em>Beranda</em>
+    </a>
+    <a href="cafe.html" class="on" aria-current="page">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+      <em>Cat Cafe</em>
+    </a>
+    <a href="grooming.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-2 2L7 8"/><path d="M3 14h18a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1Z"/><path d="M5 14V6a3 3 0 0 1 6 0v2"/></svg>
+      <em>Pet Grooming</em>
+    </a>
+    <a href="member.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+      <em>VIP Membership</em>
+    </a>
+    <a href="hewan.html">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="7" cy="8.5" r="2.2"/><circle cx="17" cy="8.5" r="2.2"/><circle cx="10" cy="5" r="2.2"/><circle cx="14" cy="5" r="2.2"/><path d="M12 11c-3.3 0-6 2.2-6 5.2 0 2 1.6 3.6 3.6 3.6.8 0 1.7-.4 2.4-.9.7.5 1.6.9 2.4.9 2 0 3.6-1.6 3.6-3.6 0-3-2.7-5.2-6-5.2z"/></svg>
+      <em>Profil Hewan</em>
+    </a>
+    <a href="feedback.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <em>Ulasan &amp; Saran</em>
+    </a>
+    <a href="info.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+      <em>Info &amp; Aturan</em>
+    </a>
+
+    <div class="user-pill">
+      <div class="user-avatar" style="background:var(--brand-teal)">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <div style="min-width:0;flex:1">
+        <div style="font-weight:700;font-size:0.92rem;color:var(--tx)">Aulia Rahma</div>
+        <small class="b ok" style="padding:1px 8px;font-size:0.72rem">Member Aktif</small>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Main Content -->
+  <main id="main" tabindex="-1">
+    <div class="row" style="justify-content:space-between;margin-bottom:20px">
+      <div>
+        <h1 style="margin:0 0 4px;color:var(--brand-teal)">Reservasi Cat Cafe</h1>
+        <small class="mut">Sesi santai bersama kucing-kucing lucu di ruang nyaman.</small>
+      </div>
+      <span class="b cafe">Tiket Rp15.000 / orang</span>
+    </div>
+
+    <!-- Notice Banner with Vector Icon -->
+    <div class="card" style="background:#FFFBF5;border-color:#FED7AA;display:flex;align-items:center;gap:16px;margin-bottom:24px">
+      <div class="card-icon" style="background:#FFF7ED;color:var(--brand-gold);border:1px solid #FED7AA;flex-shrink:0">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+      </div>
+      <div>
+        <h4 style="margin:0 0 4px;color:var(--brand-teal)">Kucing-kucing kami siap menyambutmu!</h4>
+        <p class="mut" style="margin:0">Setiap sesi berlangsung <b>1,5 jam</b>. Mohon hadir 10 menit sebelum jam sesi dimulai.</p>
+      </div>
+    </div>
+
+    <!-- Pure HTML Reservation Form -->
+    <form class="card" id="fCafe" novalidate style="border-radius:20px;border:1.5px solid var(--bd)">
+      <h3 style="margin-bottom:18px;border-bottom:1px solid var(--bd);padding-bottom:12px;color:var(--brand-teal)">Formulir Pemesanan Sesi</h3>
+      <div class="frm">
+        <div class="fld">
+          <label for="cn">Nama Lengkap</label>
+          <input id="cn" name="name" type="text" value="Aulia Rahma" placeholder="Nama pemesan" required>
+        </div>
+
+        <div class="fld">
+          <label for="cw">Nomor WhatsApp</label>
+          <input id="cw" name="wa" type="tel" value="081200000001" placeholder="08xxxxxxxxxx" required>
+        </div>
+
+        <div class="fld">
+          <label for="cd">Pilih Tanggal</label>
+          <input id="cd" name="date" type="date" required>
+        </div>
+
+        <div class="fld">
+          <label for="cq">Jumlah Pengunjung</label>
+          <input id="cq" name="qty" type="number" min="1" max="6" value="2" required>
+        </div>
+
+        <!-- Slot Waktu Interaktif (Pure HTML) -->
+        <div class="fld full" style="margin-top:8px">
+          <label class="lbl">Pilih Slot Waktu (Kapasitas terbatas agar kucing tetap nyaman)</label>
+          <div class="slots" id="slots" role="radiogroup">
+            <label class="slot">
+              <input type="radio" name="slot" value="10:00" checked>
+              <b>10:00</b>
+              <small style="color:var(--ok)">Sisa 3 slot</small>
+            </label>
+            <label class="slot">
+              <input type="radio" name="slot" value="12:00">
+              <b>12:00</b>
+              <small style="color:var(--ok)">Sisa 8 slot</small>
+            </label>
+            <label class="slot">
+              <input type="radio" name="slot" value="14:00">
+              <b>14:00</b>
+              <small style="color:var(--ok)">Sisa 4 slot</small>
+            </label>
+            <label class="slot">
+              <input type="radio" name="slot" value="16:00">
+              <b>16:00</b>
+              <small style="color:var(--ok)">Sisa 8 slot</small>
+            </label>
+            <label class="slot">
+              <input type="radio" name="slot" value="18:00">
+              <b>18:00</b>
+              <small style="color:var(--ok)">Sisa 8 slot</small>
+            </label>
+          </div>
+        </div>
+
+        <!-- Ringkasan Biaya -->
+        <div class="fld full" style="background-color:var(--sec);padding:16px 20px;border-radius:14px;margin-top:8px;border:1px solid var(--bd)">
+          <div class="row" style="justify-content:space-between">
+            <span style="font-weight:600;color:var(--tx)">Estimasi Tiket:</span>
+            <span style="font-weight:800;font-size:1.2rem;color:var(--brand-gold)">Rp30.000 <small style="font-weight:400;color:var(--tx2)">(2 × Rp15.000)</small></span>
+          </div>
+        </div>
+
+        <div class="fld full" style="margin-top:12px">
+          <label style="font-weight:500;display:flex;align-items:flex-start;gap:10px">
+            <input type="checkbox" name="agree" checked style="width:auto;margin-top:4px">
+            <span style="color:var(--tx2);font-size:0.9rem">Saya setuju mematuhi aturan kenyamanan Petsaga (cuci tangan, tidak mengganggu kucing saat tidur, &amp; hanya memberi snack dari staf).</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:20px">
+        <button class="btn cta" type="submit" style="padding:12px 28px;font-size:1rem">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+          Kirim Reservasi Cat Cafe
+        </button>
+      </div>
+    </form>
+  </main>
+</div>
+
+<!-- SPACIOUS CUSTOMER BOTTOM BAR (Mobile <= 820px, 5 Clean Tabs) -->
+<nav class="customer-bottom-nav" aria-label="Navigasi Bawah">
+  <a href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>Beranda</span>
+  </a>
+  <a href="cafe.html" class="on" aria-current="page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5c-5 0-8 3-8 8 0 4 3 7 8 7s8-3 8-7c0-5-3-8-8-8Z"/><path d="m4 8 2-5 4 3"/><path d="m20 8-2-5-4 3"/><circle cx="9" cy="13" r="1" fill="currentColor"/><circle cx="15" cy="13" r="1" fill="currentColor"/><path d="M11 16c.6.6 1.4.6 2 0"/></svg>
+    <span>Cafe</span>
+  </a>
+  <a href="grooming.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-2 2L7 8"/><path d="M3 14h18a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1Z"/><path d="M5 14V6a3 3 0 0 1 6 0v2"/></svg>
+    <span>Grooming</span>
+  </a>
+  <a href="member.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+    <span>Member</span>
+  </a>
+  <a href="info.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+    <span>Info</span>
+  </a>
+</nav>
+
+<!-- Floating Toast -->
+<div id="toast" aria-live="polite"></div>
+
+<!-- Modal Dialog -->
+<div id="modal" class="overlay" hidden>
+  <div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mt">
+    <h2 id="mt"></h2>
+    <div id="mb"></div>
+    <div class="row" id="mf" style="margin-top:20px;justify-content:flex-end"></div>
+  </div>
+</div>
+
+<script src="data/dummy-data.js"></script>
+<script src="js/core.js"></script>
+<script>
+  const cd = document.getElementById('cd');
+  if (cd && !cd.value) {
+    const today = new Date().toISOString().split('T')[0];
+    cd.min = today;
+    cd.value = today;
+  }
+</script>
+</body>
+</html>
